@@ -1497,25 +1497,25 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
       </div>
       <div class="sideblock">
         <div class="sideblock-title">Category</div>
-        <div class="cat-item active" onclick="setCat(this,'all')"><span class="cat-icon">📋</span> All Issues <span class="cat-count" id="allCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'transport')"><span class="cat-icon">🚆</span> Transport <span class="cat-count" id="transportCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'roads')"><span class="cat-icon">🛣️</span> Roads <span class="cat-count" id="roadsCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'water')"><span class="cat-icon">💧</span> Water <span class="cat-count" id="waterCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'electricity')"><span class="cat-icon">⚡</span> Electricity <span class="cat-count" id="electricityCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'corruption')"><span class="cat-icon">🔍</span> Corruption <span class="cat-count" id="corruptionCount">0</span></div>
-        <div class="cat-item" onclick="setCat(this,'education')"><span class="cat-icon">🎓</span> Education <span class="cat-count" id="educationCount">0</span></div>
+        <div class="cat-item active" onclick="setCat(this,'all')"><span class="cat-icon">📋</span> All Issues <span class="cat-count">6</span></div>
+        <div class="cat-item" onclick="setCat(this,'transport')"><span class="cat-icon">🚆</span> Transport <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'roads')"><span class="cat-icon">🛣️</span> Roads <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'water')"><span class="cat-icon">💧</span> Water <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'electricity')"><span class="cat-icon">⚡</span> Electricity <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'corruption')"><span class="cat-icon">🔍</span> Corruption <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'education')"><span class="cat-icon">🎓</span> Education <span class="cat-count">1</span></div>
       </div>
       <div class="sideblock">
         <div class="sideblock-title">State</div>
         <div style="padding:12px;">
-          <select class="form-input" style="font-size:13px;padding:8px 12px;" onchange="filterByState(this.value)">
-            <option value="">All India</option>
-            <option value="Gujarat">Gujarat</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Delhi">Delhi</option>
-            <option value="Karnataka">Karnataka</option>
-            <option value="Rajasthan">Rajasthan</option>
-            <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <select class="form-input" style="font-size:13px;padding:8px 12px;" onchange="showToast('Filtering by '+this.value,'info')">
+            <option>All India</option>
+            <option selected>Gujarat</option>
+            <option>Maharashtra</option>
+            <option>Delhi</option>
+            <option>Karnataka</option>
+            <option>Rajasthan</option>
+            <option>Uttar Pradesh</option>
           </select>
         </div>
       </div>
@@ -1525,7 +1525,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
     <main>
       <div id="feedContainer"></div>
       <div style="text-align:center;padding:8px 0 24px;">
-        <button class="btn-ghost" onclick="loadMoreComplaints()" style="padding:11px 28px;">Load more</button>
+        <button class="btn-ghost" onclick="showToast('Loading more…','info')" style="padding:11px 28px;">Load more</button>
       </div>
     </main>
 
@@ -1561,9 +1561,9 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
         <div class="acard-delta delta-up">↑ +14% this week</div>
       </div>
       <div class="acard">
-        <div class="acard-num" id="a2">0%</div>
+        <div class="acard-num">25.2%</div>
         <div class="acard-label">Resolution Rate</div>
-        <div class="acard-delta delta-up" id="resolutionDelta">↑ +3% from last month</div>
+        <div class="acard-delta delta-up">↑ +3% from last month</div>
       </div>
       <div class="acard">
         <div class="acard-num">8.4d</div>
@@ -1658,13 +1658,16 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   <div style="max-width:900px;margin:0 auto;padding:36px 32px 80px;" id="profileWrap"></div>
 </div>
 
-<!-- FAB -->
+<!-- FAB (hidden when logged in, show Report btn in nav) -->
 <button class="fab" id="fabBtn" onclick="openComplaintModal()" title="Report Issue" style="display:none;">＋</button>
 
 <!-- TOAST STACK -->
 <div class="toast-stack" id="toastStack"></div>
 
-<!-- MODALS -->
+<!-- ══════════════════════════════════════
+     MODALS
+══════════════════════════════════════ -->
+
 <!-- LOGIN MODAL -->
 <div class="overlay" id="loginModal">
   <div class="modal">
@@ -1690,6 +1693,9 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
         <div class="form-group">
           <label class="form-label">Password</label>
           <input class="form-input" type="password" placeholder="••••••••" id="lPass"/>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:18px;">
+          <span style="font-size:13px;color:var(--sky);cursor:pointer;font-weight:500;">Forgot password?</span>
         </div>
         <button class="btn-fill" style="width:100%;padding:12px;font-size:15px;border-radius:12px;" onclick="doLogin()">Sign in →</button>
         <div class="divider-or">or</div>
@@ -1730,6 +1736,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
           <input class="form-input" type="password" placeholder="Create a strong password" id="rPass"/>
         </div>
         <button class="btn-fill" style="width:100%;padding:12px;font-size:15px;border-radius:12px;" onclick="doRegister()">Create account →</button>
+        <p style="font-size:12px;color:var(--ink-5);text-align:center;margin-top:14px;">By creating an account, you agree to our Terms. False complaints may result in suspension.</p>
       </div>
     </div>
   </div>
@@ -1748,7 +1755,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
     <div class="modal-body">
       <div class="form-group">
         <label class="form-label">Issue title *</label>
-        <input class="form-input" type="text" placeholder="Brief, clear description of the problem" id="cTitle"/>
+        <input class="form-input" type="text" placeholder="Brief, clear description of the problem" id="cTitle" style="font-size:16px;font-weight:500;"/>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -1791,16 +1798,27 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
       </div>
       <div class="form-group">
         <label class="form-label">Description *</label>
-        <textarea class="form-input" placeholder="Describe the issue in detail..." id="cDesc" rows="5"></textarea>
+        <textarea class="form-input" placeholder="Describe the issue in detail — dates, frequency, impact on daily life, who you've contacted…" id="cDesc" rows="5"></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">Tags</label>
-        <input class="form-input" type="text" placeholder="e.g. trains, delay, railway (comma-separated)" id="cTags"/>
+        <input class="form-input" type="text" placeholder="e.g. trains, delay, western-railway (comma-separated)" id="cTags"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Evidence & Proof</label>
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <div class="upload-emoji">📎</div>
+          <div class="upload-label">Click to upload photos, videos or documents</div>
+          <div class="upload-hint">JPG, PNG, PDF, MP4 — up to 10 MB each</div>
+          <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf" style="display:none" onchange="handleFiles(this)"/>
+        </div>
+        <div class="file-chips" id="fileChips"></div>
       </div>
       <div style="display:flex;gap:12px;margin-top:4px;">
-        <button class="btn-coral" onclick="submitComplaint()" style="flex:1;padding:13px;font-size:15px;">Submit complaint</button>
+        <button class="btn-coral" onclick="submitComplaint()" style="flex:1;padding:13px;font-size:15px;justify-content:center;">Submit complaint</button>
         <button class="btn-ghost" onclick="closeModal('complaintModal')" style="padding:13px 20px;">Cancel</button>
       </div>
+      <p style="font-size:12px;color:var(--ink-5);text-align:center;margin-top:14px;">🔐 Identity verified but pseudonymous in public view</p>
     </div>
   </div>
 </div>
@@ -1817,769 +1835,470 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
 </div>
 
 <script>
-// ==================== BACKEND API INTEGRATION ====================
-// Auto-detect API URL based on environment
-const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:5000/api'
-    : `${window.location.protocol}//${window.location.hostname}/api`;
-
-let authToken = localStorage.getItem('authToken');
+// ─── DATA ───
 let currentUser = null;
 let activeSort = 'latest';
 let activeCat = 'all';
-let activeState = '';
-let currentSkip = 0;
-let isLoading = false;
-let hasMore = true;
 
-// Helper function for API calls
-async function apiCall(endpoint, options = {}) {
-    const headers = {
-        'Content-Type': 'application/json',
-        ...options.headers
-    };
-    
-    if (authToken) {
-        headers['Authorization'] = `Bearer ${authToken}`;
-    }
-    
-    const response = await fetch(`${API_BASE}${endpoint}`, {
-        ...options,
-        headers
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-        throw new Error(data.error || 'API call failed');
-    }
-    
-    return data;
+const CAT = {
+  transport:'🚆 Transport', roads:'🛣️ Roads', water:'💧 Water',
+  electricity:'⚡ Electricity', health:'🏥 Health', corruption:'🔍 Corruption',
+  environment:'🌿 Environment', education:'🎓 Education', other:'📋 Other'
+};
+
+const URGENCY_COLOR = { critical:'var(--red)', high:'var(--saffron)', medium:'var(--sky)', low:'var(--green)' };
+
+let DATA = [
+  { id:1, user:'Arjun Mehta', init:'AM', verified:true, time:'2h ago', cat:'transport',
+    title:'Train frequency on Ahmedabad–Mumbai route cut by 40%',
+    body:'The frequency of trains on the Ahmedabad–Mumbai route has been reduced from 14 to 8 daily services. During peak hours, trains are overcrowded — passengers standing in aisles for 7+ hours. Ongoing for 3 months with no official communication.',
+    location:'Ahmedabad, Gujarat', tags:['railways','western-railway','overcrowding'],
+    up:1842, dn:42, comments:247, status:'review', urgency:'high',
+    proofs:['🚂','📊'], viral:true, pinned:false,
+    authResp:'Indian Railways: We acknowledge this concern. Schedule changes under review for next month.' },
+  { id:2, user:'Priya Patel', init:'PP', verified:true, time:'5h ago', cat:'water',
+    title:'Zero water supply for 72+ hours — Bopal Ward 14',
+    body:'Residents of Ward 14, Bopal have been without piped water for over 3 days. Helpline calls go unanswered. Elderly residents and families with young children are critically affected.',
+    location:'Bopal, Ahmedabad', tags:['water-supply','municipality','emergency'],
+    up:963, dn:12, comments:89, status:'open', urgency:'critical',
+    proofs:['💧','📷'], viral:false, pinned:true },
+  { id:3, user:'Rajesh Kumar', init:'RK', verified:false, time:'1d ago', cat:'roads',
+    title:'NH-48 potholes near Vadodara causing serious accidents',
+    body:'A 2 km stretch of NH-48 near Vadodara has multiple dangerous potholes, some over 30 cm deep. Four vehicle accidents reported in the last week. NHAI notified twice — no action taken.',
+    location:'Vadodara, Gujarat', tags:['NHAI','highway','potholes','road-safety'],
+    up:724, dn:31, comments:156, status:'open', urgency:'high',
+    proofs:['🛣️','📸','📹'], viral:false, pinned:false },
+  { id:4, user:'Sneha Joshi', init:'SJ', verified:true, time:'2d ago', cat:'electricity',
+    title:'Daily 8-hour unscheduled power cuts — Surat South zone',
+    body:'Surat South residents have faced unscheduled cuts of 4–8 hours daily for a month. DGVCL helpline unreachable. Businesses and students severely impacted.',
+    location:'Surat South, Gujarat', tags:['DGVCL','power-cut','loadshedding'],
+    up:445, dn:28, comments:72, status:'resolved', urgency:'medium',
+    proofs:['⚡'], viral:false, pinned:false,
+    authResp:'DGVCL: Transformer upgrade completed. Service fully restored as of March 25.' },
+  { id:5, user:'Dev P.', init:'DP', verified:true, time:'3d ago', cat:'education',
+    title:'400+ students share 2 functioning toilets — Govt. School Anand',
+    body:'Govt. Primary School No. 7, Anand has 420 students but only 2 functional toilets. The remaining 4 have been broken for 8 months — a serious hygiene crisis, especially for girls who skip school as a result.',
+    location:'Anand, Gujarat', tags:['education','swachh-bharat','infrastructure'],
+    up:1122, dn:8, comments:134, status:'review', urgency:'high',
+    proofs:['🏫','📷'], viral:true, pinned:false },
+  { id:6, user:'Amit Thakkar', init:'AT', verified:false, time:'4d ago', cat:'corruption',
+    title:'Municipal inspector demanding ₹15,000 bribe for building NOC',
+    body:'An inspector is demanding ₹15,000 cash for a standard residential building NOC in Gandhinagar. When refused, the process stalled for 4 months. All required documents were submitted on day one.',
+    location:'Gandhinagar, Gujarat', tags:['corruption','bribery','municipality','NOC'],
+    up:2341, dn:67, comments:312, status:'open', urgency:'critical',
+    proofs:['📋','📱','🎙️'], viral:true, pinned:false }
+];
+
+const LEADERBOARD = [
+  { name:'Arjun Mehta', sub:'47 complaints · Gujarat', score:'12,840', v:true },
+  { name:'Priya Sharma', sub:'38 complaints · Maharashtra', score:'9,760', v:true },
+  { name:'Vikram Nair',  sub:'31 complaints · Delhi',     score:'7,823', v:false },
+  { name:'Sneha Patel',  sub:'26 complaints · Karnataka',  score:'6,540', v:true },
+  { name:'Rajesh K.',    sub:'19 complaints · Gujarat',    score:'4,210', v:false },
+];
+
+const TRENDING = [
+  { tag:'#RailwayDelays', n:'4.2K' },
+  { tag:'#PotholesMumbai', n:'3.1K' },
+  { tag:'#WaterCrisis', n:'2.8K' },
+  { tag:'#PowerCuts', n:'1.9K' },
+  { tag:'#CorruptionReport', n:'1.4K' },
+];
+
+const RESP_RATES = [
+  { dept:'Railways', pct:74, color:'var(--green)' },
+  { dept:'Municipality', pct:51, color:'var(--sky)' },
+  { dept:'Roads & NH', pct:38, color:'var(--saffron)' },
+  { dept:'Water Dept.', pct:22, color:'var(--coral)' },
+];
+
+// ─── INIT ───
+window.addEventListener('DOMContentLoaded', () => {
+  renderFeed();
+  renderLeaderboard();
+  renderTrending();
+  renderResponseBars();
+  renderAnalytics();
+  animateStats();
+});
+
+// ─── PAGE ───
+function showPage(p) {
+  if (p === 'profile' && !currentUser) { openModal('loginModal'); return; }
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  document.querySelectorAll('.nav-btn-link').forEach(x => x.classList.remove('active'));
+  if (p === 'profile') renderProfile();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Load complaints from backend
-async function loadComplaints(reset = true) {
-    if (isLoading) return;
-    
-    if (reset) {
-        currentSkip = 0;
-        hasMore = true;
-        document.getElementById('feedContainer').innerHTML = '<div style="text-align:center;padding:40px;">Loading complaints...</div>';
-    }
-    
-    isLoading = true;
-    
-    try {
-        let url = `/complaints?limit=10&skip=${currentSkip}`;
-        
-        if (activeCat && activeCat !== 'all') {
-            url += `&category=${activeCat}`;
-        }
-        if (activeSort && activeSort !== 'latest') {
-            url += `&sort=${activeSort}`;
-        }
-        if (activeState) {
-            url += `&state=${encodeURIComponent(activeState)}`;
-        }
-        
-        const complaints = await apiCall(url);
-        
-        if (complaints.length < 10) {
-            hasMore = false;
-        }
-        
-        if (reset) {
-            renderFeed(complaints);
-        } else {
-            appendToFeed(complaints);
-        }
-        
-        currentSkip += complaints.length;
-    } catch (error) {
-        console.error('Error loading complaints:', error);
-        if (reset) {
-            document.getElementById('feedContainer').innerHTML = `
-                <div class="empty">
-                    <div class="empty-emoji">⚠️</div>
-                    <div class="empty-title">Failed to load complaints</div>
-                    <div class="empty-sub">Please check your connection or try again later.</div>
-                    <button class="btn-coral" style="margin-top:20px;" onclick="loadComplaints(true)">Retry</button>
-                </div>`;
-        }
-        showToast(error.message, 'error');
-    } finally {
-        isLoading = false;
-    }
+// ─── FEED ───
+function renderFeed(list) {
+  list = list || getFiltered();
+  const el = document.getElementById('feedContainer');
+  if (!list.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-emoji">📭</div><div class="empty-title">Nothing here</div><div class="empty-sub">Try a different category or filter</div></div>`;
+    return;
+  }
+  el.innerHTML = list.map(renderCard).join('');
 }
 
-// Load more complaints
-async function loadMoreComplaints() {
-    if (!hasMore) {
-        showToast('No more complaints to load', 'info');
-        return;
-    }
-    await loadComplaints(false);
+function getFiltered() {
+  let list = [...DATA];
+  if (activeCat !== 'all') list = list.filter(c => c.cat === activeCat);
+  if (activeSort === 'trending') list.sort((a,b) => (b.up-b.dn)-(a.up-a.dn));
+  else if (activeSort === 'critical') list = list.filter(c => c.urgency==='critical'||c.urgency==='high');
+  else if (activeSort === 'resolved') list = list.filter(c => c.status==='resolved');
+  else list.sort((a,b) => b.id - a.id);
+  return list;
 }
 
-// Render feed with complaints
-function renderFeed(complaints) {
-    const el = document.getElementById('feedContainer');
-    if (!complaints.length) {
-        el.innerHTML = `<div class="empty"><div class="empty-emoji">📭</div><div class="empty-title">Nothing here</div><div class="empty-sub">Try a different category or filter</div></div>`;
-        return;
-    }
-    el.innerHTML = complaints.map(renderCard).join('');
-}
-
-// Append to feed (for load more)
-function appendToFeed(complaints) {
-    const el = document.getElementById('feedContainer');
-    complaints.forEach(complaint => {
-        el.insertAdjacentHTML('beforeend', renderCard(complaint));
-    });
-}
-
-// Render individual card
 function renderCard(c) {
-    const pct = (c.upvotes + c.downvotes > 0) ? Math.round(c.upvotes / (c.upvotes + c.downvotes) * 100) : 0;
-    const statusBadge = {
-        open: '<span class="badge badge-open">Open</span>',
-        review: '<span class="badge badge-review">Under Review</span>',
-        resolved: '<span class="badge badge-done">Resolved ✓</span>'
-    }[c.status] || '';
-    
-    const user = c.user || { name: 'Anonymous', initials: 'AN', verified: false };
-    
-    const CAT = {
-        transport: '🚆 Transport', roads: '🛣️ Roads', water: '💧 Water',
-        electricity: '⚡ Electricity', health: '🏥 Health', corruption: '🔍 Corruption',
-        environment: '🌿 Environment', education: '🎓 Education', other: '📋 Other'
-    };
-    
-    return `
-<div class="card" onclick="openDetail('${c._id}')">
+  const pct = Math.round(c.up/(c.up+c.dn+1)*100);
+  const statusBadge = {
+    open:'<span class="badge badge-open">Open</span>',
+    review:'<span class="badge badge-review">Under Review</span>',
+    resolved:'<span class="badge badge-done">Resolved ✓</span>'
+  }[c.status] || '';
+
+  return `
+<div class="card" onclick="openDetail(${c.id})">
   <div class="card-inner">
     <div class="urgency-stripe ${c.urgency}"></div>
     <div class="card-body-wrap">
       <div class="card-meta">
-        <div class="card-avi">${user.initials || 'AN'}</div>
+        <div class="card-avi">${c.init}</div>
         <div class="card-user-info">
-          <div class="card-username">${escapeHtml(user.name)}${user.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
-          <div class="card-time">${new Date(c.created_at).toLocaleDateString()} · ${escapeHtml(c.city)}, ${escapeHtml(c.state)}</div>
+          <div class="card-username">${c.user}${c.verified?` <span class="verified-tick">✓</span>`:''}</div>
+          <div class="card-time">${c.time} · ${c.location}</div>
         </div>
         <div class="card-badges">
-          ${c.viral ? '<span class="badge badge-viral">🔥 Viral</span>' : ''}
-          <span class="badge badge-cat">${CAT[c.category] || c.category}</span>
+          ${c.pinned?'<span class="badge badge-pin">📌 Pinned</span>':''}
+          ${c.viral?'<span class="badge badge-viral">🔥 Viral</span>':''}
+          <span class="badge badge-cat">${CAT[c.cat]||c.cat}</span>
           ${statusBadge}
         </div>
       </div>
-      <div class="card-title">${escapeHtml(c.title)}</div>
-      <div class="card-excerpt">${escapeHtml(c.description.slice(0, 180))}${c.description.length > 180 ? '…' : ''}</div>
-      <div class="card-tags">${c.tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('')}</div>
-      ${c.auth_response ? `<div class="authority-response"><div class="ar-label">🏛 Official Response</div><div class="ar-text">${escapeHtml(c.auth_response.slice(0, 100))}…</div></div>` : ''}
+      <div class="card-title">${c.title}</div>
+      <div class="card-excerpt">${c.body.slice(0,180)}${c.body.length>180?'…':''}</div>
+      <div class="card-tags">${c.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+      ${c.proofs.length?`<div class="proof-row">${c.proofs.map(e=>`<div class="proof-thumb">${e}</div>`).join('')}</div>`:''}
+      ${c.authResp?`<div class="authority-response"><div class="ar-label">🏛 Official Response</div><div class="ar-text">${c.authResp.slice(0,100)}…</div></div>`:''}
     </div>
   </div>
   <div class="card-footer" onclick="event.stopPropagation()">
     <div class="vote-group">
-      <button class="vote-btn up" onclick="vote(event, '${c._id}', 'up')">▲ <span id="u${c._id}">${c.upvotes.toLocaleString()}</span></button>
+      <button class="vote-btn up ${c.uv==='up'?'voted':''}" onclick="vote(event,${c.id},'up')">▲ <span id="u${c.id}">${c.up.toLocaleString()}</span></button>
       <div class="vote-sep"></div>
-      <button class="vote-btn down" onclick="vote(event, '${c._id}', 'down')">▼ <span id="d${c._id}">${c.downvotes}</span></button>
+      <button class="vote-btn down ${c.uv==='down'?'voted':''}" onclick="vote(event,${c.id},'down')">▼ <span id="d${c.id}">${c.dn}</span></button>
     </div>
-    <button class="foot-btn" onclick="openDetail('${c._id}')">💬 ${c.comments?.length || 0}</button>
-    <button class="foot-btn" onclick="shareC(event, '${c._id}')">↗ Share</button>
+    <button class="foot-btn" onclick="openDetail(${c.id})">💬 ${c.comments}</button>
+    <button class="foot-btn" onclick="shareC(event,${c.id})">↗ Share</button>
+    <button class="foot-btn" onclick="followC(event,${c.id})">🔔 Follow</button>
     <span class="vote-pct">${pct}% valid</span>
   </div>
 </div>`;
 }
 
-// Helper to escape HTML
-function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-    });
+// ─── VOTE ───
+function vote(e, id, dir) {
+  e.stopPropagation();
+  if (!currentUser) { openModal('loginModal'); showToast('Sign in to vote','info'); return; }
+  const c = DATA.find(x=>x.id===id); if(!c) return;
+  if (c.uv===dir) { dir==='up'?c.up--:c.dn--; c.uv=''; }
+  else {
+    if(c.uv==='up') c.up--; if(c.uv==='down') c.dn--;
+    dir==='up'?c.up++:c.dn++; c.uv=dir;
+  }
+  const uel=document.getElementById('u'+id), del=document.getElementById('d'+id);
+  if(uel){uel.textContent=c.up.toLocaleString(); uel.style.transform='scale(1.4)'; setTimeout(()=>uel.style.transform='',200);}
+  if(del) del.textContent=c.dn;
+  showToast(dir==='up'?'👍 Upvoted!':'👎 Downvoted.','success');
 }
 
-// Vote on complaint
-async function vote(e, id, type) {
-    e.stopPropagation();
-    
-    if (!authToken) {
-        openModal('loginModal');
-        showToast('Please sign in to vote', 'info');
-        return;
-    }
-    
-    try {
-        await apiCall(`/complaints/${id}/vote`, {
-            method: 'POST',
-            body: JSON.stringify({ vote_type: type })
-        });
-        
-        // Reload to get updated vote counts
-        await loadComplaints(true);
-        showToast(`Voted ${type}!`, 'success');
-    } catch (error) {
-        console.error('Error voting:', error);
-        showToast(error.message, 'error');
-    }
+// ─── FILTERS ───
+function setSort(el, val) {
+  document.querySelectorAll('.sidebar-left .pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active'); activeSort=val; renderFeed();
 }
 
-// Submit complaint
-async function submitComplaint() {
-    if (!authToken) {
-        openModal('loginModal');
-        showToast('Please sign in to report an issue', 'info');
-        return;
-    }
-    
-    const title = document.getElementById('cTitle').value.trim();
-    const cat = document.getElementById('cCat').value;
-    const desc = document.getElementById('cDesc').value.trim();
-    const city = document.getElementById('cCity').value.trim();
-    const state = document.getElementById('cState').value;
-    const urgency = document.getElementById('cUrgency').value;
-    const tags = document.getElementById('cTags').value.split(',').map(t => t.trim()).filter(Boolean);
-    
-    if (!title || !cat || !desc || !city || !state) {
-        showToast('Please fill all required fields', 'error');
-        return;
-    }
-    
-    try {
-        const complaint = {
-            title,
-            category: cat,
-            description: desc,
-            city,
-            state,
-            urgency,
-            tags
-        };
-        
-        await apiCall('/complaints', {
-            method: 'POST',
-            body: JSON.stringify(complaint)
-        });
-        
-        closeModal('complaintModal');
-        showToast('Complaint filed successfully!', 'success');
-        
-        // Clear form
-        document.getElementById('cTitle').value = '';
-        document.getElementById('cDesc').value = '';
-        document.getElementById('cCity').value = '';
-        document.getElementById('cTags').value = '';
-        
-        // Reload complaints
-        await loadComplaints(true);
-        await loadAnalytics(); // refresh analytics
-        await updateCategoryCounts(); // refresh category counts
-    } catch (error) {
-        console.error('Error submitting complaint:', error);
-        showToast(error.message, 'error');
-    }
+function setCat(el, val) {
+  document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active'); activeCat=val; renderFeed();
 }
 
-// Login function
-async function doLogin() {
-    const email = document.getElementById('lEmail').value;
-    const password = document.getElementById('lPass').value;
-    
-    if (!email || !password) {
-        showToast('Please enter email and password', 'error');
-        return;
-    }
-    
-    try {
-        const response = await apiCall('/auth/login', {
-            method: 'POST',
-            body: JSON.stringify({ email, password })
-        });
-        
-        authToken = response.token;
-        localStorage.setItem('authToken', authToken);
-        currentUser = response.user;
-        
-        // Update UI
-        document.getElementById('authBtns').style.display = 'none';
-        document.getElementById('userBtns').style.display = 'flex';
-        document.getElementById('navAvatar').textContent = currentUser.initials;
-        
-        closeModal('loginModal');
-        showToast(`Welcome back, ${currentUser.name}!`, 'success');
-        
-        // Reload data for authenticated user
-        await loadComplaints(true);
-        await loadLeaderboard();
-    } catch (error) {
-        console.error('Login error:', error);
-        showToast(error.message, 'error');
-    }
+function liveSearch(q) {
+  if (!q.trim()) { renderFeed(); return; }
+  const r = q.toLowerCase();
+  renderFeed(DATA.filter(c =>
+    c.title.toLowerCase().includes(r) || c.body.toLowerCase().includes(r) ||
+    c.tags.some(t=>t.includes(r)) || c.location.toLowerCase().includes(r)
+  ));
 }
 
-// Register function
-async function doRegister() {
-    const firstName = document.getElementById('rFirst').value;
-    const lastName = document.getElementById('rLast').value;
-    const email = document.getElementById('rEmail').value;
-    const city = document.getElementById('rCity').value;
-    const state = document.getElementById('rState').value;
-    const password = document.getElementById('rPass').value;
-    
-    if (!firstName || !lastName || !email || !city || !state || !password) {
-        showToast('Please fill all required fields', 'error');
-        return;
-    }
-    
-    try {
-        const response = await apiCall('/auth/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                first_name: firstName,
-                last_name: lastName,
-                email,
-                city,
-                state,
-                password
-            })
-        });
-        
-        authToken = response.token;
-        localStorage.setItem('authToken', authToken);
-        currentUser = response.user;
-        
-        // Update UI
-        document.getElementById('authBtns').style.display = 'none';
-        document.getElementById('userBtns').style.display = 'flex';
-        document.getElementById('navAvatar').textContent = currentUser.initials;
-        
-        closeModal('loginModal');
-        showToast(`Welcome, ${firstName}! Account created successfully`, 'success');
-        
-        await loadComplaints(true);
-    } catch (error) {
-        console.error('Registration error:', error);
-        showToast(error.message, 'error');
-    }
-}
-
-// OAuth placeholder
-function doOAuth(provider) {
-    showToast(`${provider} login coming soon!`, 'info');
-}
-
-// Load leaderboard
-async function loadLeaderboard() {
-    try {
-        const users = await apiCall('/analytics/leaderboard');
-        const leaderboardHtml = users.map((u, i) => {
-            const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : 'rn';
-            return `
-<div class="lb-item">
-  <span class="lb-rank ${rankClass}">${i + 1}</span>
-  <div class="lb-info">
-    <div class="lb-name">${escapeHtml(u.name)}${u.verified ? ' <span class="verified-tick" style="display:inline-flex;">✓</span>' : ''}</div>
-    <div class="lb-sub">${u.complaints} complaints · ${escapeHtml(u.city || 'India')}</div>
-  </div>
-  <span class="lb-score">${u.impact_score}</span>
-</div>`;
-        }).join('');
-        document.getElementById('leaderboard').innerHTML = leaderboardHtml || '<div class="empty-sub">No data yet</div>';
-    } catch (error) {
-        console.error('Error loading leaderboard:', error);
-        document.getElementById('leaderboard').innerHTML = '<div class="empty-sub">Unavailable</div>';
-    }
-}
-
-// Load trending tags
-async function loadTrendingTags() {
-    try {
-        const tags = await apiCall('/analytics/trending-tags');
-        const trendingHtml = tags.slice(0, 5).map(t => `
-<div class="trending-item" onclick="liveSearch('${escapeHtml(t._id)}')">
-  <span class="trend-tag">#${escapeHtml(t._id)}</span>
-  <span class="trend-count">${t.count} posts</span>
-</div>`).join('');
-        document.getElementById('trendingTags').innerHTML = trendingHtml || '<div class="empty-sub">No trending tags</div>';
-    } catch (error) {
-        console.error('Error loading trending tags:', error);
-        document.getElementById('trendingTags').innerHTML = '<div class="empty-sub">Unavailable</div>';
-    }
-}
-
-// Load response rates
-async function loadResponseRates() {
-    try {
-        const rates = await apiCall('/analytics/response-rates');
-        const ratesHtml = rates.map(r => `
-<div class="response-bar">
-  <div class="rb-header"><span>${escapeHtml(r.category)}</span><span class="rb-pct">${r.percentage}%</span></div>
-  <div class="rb-track"><div class="rb-fill" style="width:${r.percentage}%;"></div></div>
-</div>`).join('');
-        document.getElementById('responseBars').innerHTML = ratesHtml || '<div class="empty-sub">No data yet</div>';
-    } catch (error) {
-        console.error('Error loading response rates:', error);
-        document.getElementById('responseBars').innerHTML = '<div class="empty-sub">Unavailable</div>';
-    }
-}
-
-// Load analytics
-async function loadAnalytics() {
-    try {
-        const stats = await apiCall('/analytics/stats');
-        document.getElementById('a1').textContent = stats.total?.toLocaleString() || '0';
-        document.getElementById('a2').textContent = `${Math.round(stats.resolution_rate || 0)}%`;
-        document.getElementById('a4').textContent = (stats.total_votes || 0).toLocaleString();
-        
-        // Update hero stats
-        document.getElementById('s1').textContent = stats.total?.toLocaleString() || '0';
-        document.getElementById('s2').textContent = stats.resolved?.toLocaleString() || '0';
-        document.getElementById('s3').textContent = stats.unique_cities || '0';
-        document.getElementById('s4').textContent = stats.unique_users ? Math.round(stats.unique_users / 1000) + 'K' : '0';
-        
-        // Render category bars
-        const categoryHtml = (stats.categories || []).map(c => `
-<div style="margin-bottom:14px;">
-  <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:5px;">
-    <span>${escapeHtml(c._id)}</span>
-    <span>${c.count}</span>
-  </div>
-  <div class="rb-track"><div class="rb-fill" style="width:${Math.min(100, (c.count / (stats.total || 1)) * 100)}%;"></div></div>
-</div>`).join('');
-        document.getElementById('analyticsBars').innerHTML = categoryHtml || '<div class="empty-sub">No data yet</div>';
-        
-        // Render top cities
-        const cityHtml = (stats.top_cities || []).slice(0, 5).map((c, i) => `
-<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-3);">
-  <span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--ink-5);width:24px;text-align:center;">${i + 1}</span>
-  <span style="font-size:14px;font-weight:500;color:var(--ink);flex:1;">${escapeHtml(c._id)}</span>
-  <span style="font-family:var(--font-mono);font-size:12px;color:var(--coral);">${c.count}</span>
-</div>`).join('');
-        document.getElementById('cityRanks').innerHTML = cityHtml || '<div class="empty-sub">No data yet</div>';
-        
-        // Update category counts in left sidebar
-        await updateCategoryCounts();
-    } catch (error) {
-        console.error('Error loading analytics:', error);
-        // Don't show toast, just fallback to zeros
-    }
-}
-
-// Update category counts in left sidebar
-async function updateCategoryCounts() {
-    try {
-        const stats = await apiCall('/analytics/stats');
-        if (stats.categories) {
-            const counts = {};
-            stats.categories.forEach(c => { counts[c._id] = c.count; });
-            document.getElementById('allCount').textContent = stats.total || 0;
-            document.getElementById('transportCount').textContent = counts['transport'] || 0;
-            document.getElementById('roadsCount').textContent = counts['roads'] || 0;
-            document.getElementById('waterCount').textContent = counts['water'] || 0;
-            document.getElementById('electricityCount').textContent = counts['electricity'] || 0;
-            document.getElementById('corruptionCount').textContent = counts['corruption'] || 0;
-            document.getElementById('educationCount').textContent = counts['education'] || 0;
-        }
-    } catch (error) {
-        console.error('Error updating category counts:', error);
-    }
-}
-
-// Open complaint details
-async function openDetail(complaintId) {
-    try {
-        const complaint = await apiCall(`/complaints/${complaintId}`);
-        document.getElementById('detailTitle').textContent = `${complaint.category} — Complaint`;
-        
-        const CAT = {
-            transport: '🚆 Transport', roads: '🛣️ Roads', water: '💧 Water',
-            electricity: '⚡ Electricity', health: '🏥 Health', corruption: '🔍 Corruption',
-            environment: '🌿 Environment', education: '🎓 Education', other: '📋 Other'
-        };
-        
-        const statusBadge = {
-            open: '<span class="badge badge-open">Open</span>',
-            review: '<span class="badge badge-review">Under Review</span>',
-            resolved: '<span class="badge badge-done">Resolved ✓</span>'
-        }[complaint.status] || '';
-        
-        const pct = (complaint.upvotes + complaint.downvotes > 0) ? Math.round(complaint.upvotes / (complaint.upvotes + complaint.downvotes) * 100) : 0;
-        
-        document.getElementById('detailBody').innerHTML = `
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
-  <div class="card-avi" style="width:44px;height:44px;font-size:16px;">${escapeHtml(complaint.user?.initials || 'AN')}</div>
-  <div>
-    <div style="font-size:15px;font-weight:600;color:var(--ink);">${escapeHtml(complaint.user?.name || 'Anonymous')}${complaint.user?.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
-    <div style="font-size:12px;color:var(--ink-4);">${new Date(complaint.created_at).toLocaleDateString()} · ${escapeHtml(complaint.city)}, ${escapeHtml(complaint.state)}</div>
-  </div>
-  <div class="card-badges" style="margin-left:auto;">
-    <span class="badge badge-cat">${CAT[complaint.category] || complaint.category}</span>
-    ${statusBadge}
-  </div>
-</div>
-<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;">${escapeHtml(complaint.title)}</h2>
-<p style="font-size:15px;color:var(--ink-3);line-height:1.8;margin-bottom:18px;">${escapeHtml(complaint.description)}</p>
-<div class="card-tags" style="margin-bottom:18px;">${complaint.tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('')}</div>
-${complaint.auth_response ? `<div class="authority-response" style="margin-bottom:18px;"><div class="ar-label">🏛 Official Authority Response</div><div class="ar-text">${escapeHtml(complaint.auth_response)}</div></div>` : ''}
-<div style="background:var(--cream);border:1.5px solid var(--cream-3);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-  <button class="vote-btn up" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event, '${complaint._id}', 'up'); closeModal('detailModal');">▲ ${complaint.upvotes.toLocaleString()} Upvotes</button>
-  <div style="flex:1;height:6px;background:var(--cream-3);border-radius:99px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--green);border-radius:99px;"></div></div>
-  <button class="vote-btn down" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event, '${complaint._id}', 'down'); closeModal('detailModal');">▼ ${complaint.downvotes} Downvotes</button>
-</div>
-<div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:12px;">💬 Community Discussion (${complaint.comments?.length || 0})</div>
-<div class="comment-list">
-  ${(complaint.comments || []).map(c => `
-<div class="comment">
-  <div class="cmt-avi">${escapeHtml(c.user?.initials || 'AN')}</div>
-  <div>
-    <div class="cmt-user">${escapeHtml(c.user?.name || 'Anonymous')}</div>
-    <div class="cmt-body">${escapeHtml(c.text)}</div>
-    <div class="cmt-time">${new Date(c.created_at).toLocaleDateString()}</div>
-  </div>
-</div>`).join('')}
-</div>
-<div style="display:flex;gap:10px;margin-top:16px;">
-  <input class="form-input" placeholder="Add your comment..." id="commentInput" style="flex:1;" ${!authToken ? 'onclick="closeModal(\'detailModal\');openModal(\'loginModal\');"' : ''}/>
-  <button class="btn-fill" style="padding:10px 18px;border-radius:10px;" onclick="addComment('${complaint._id}')">Post</button>
-</div>`;
-        
-        openModal('detailModal');
-    } catch (error) {
-        console.error('Error loading complaint details:', error);
-        showToast('Failed to load complaint details', 'error');
-    }
-}
-
-// Add comment
-async function addComment(complaintId) {
-    if (!authToken) {
-        openModal('loginModal');
-        return;
-    }
-    
-    const commentText = document.getElementById('commentInput')?.value;
-    if (!commentText) {
-        showToast('Please enter a comment', 'error');
-        return;
-    }
-    
-    try {
-        await apiCall(`/complaints/${complaintId}/comments`, {
-            method: 'POST',
-            body: JSON.stringify({ text: commentText })
-        });
-        
-        closeModal('detailModal');
-        showToast('Comment added!', 'success');
-        await openDetail(complaintId);
-    } catch (error) {
-        console.error('Error adding comment:', error);
-        showToast(error.message, 'error');
-    }
-}
-
-// Search function
-async function liveSearch(query) {
-    if (!query.trim()) {
-        await loadComplaints(true);
-        return;
-    }
-    
-    try {
-        const complaints = await apiCall(`/complaints?search=${encodeURIComponent(query)}`);
-        renderFeed(complaints);
-    } catch (error) {
-        console.error('Search error:', error);
-        showToast('Search failed', 'error');
-    }
-}
-
-// Filter functions
-function setSort(el, sort) {
-    document.querySelectorAll('.sidebar-left .pill').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    activeSort = sort;
-    loadComplaints(true);
-}
-
-function setCat(el, cat) {
-    document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    activeCat = cat;
-    loadComplaints(true);
-}
-
-function filterByState(state) {
-    activeState = state;
-    loadComplaints(true);
-}
-
-// Share function
-function shareC(e, id) {
-    e.stopPropagation();
-    const url = `${window.location.origin}?c=${id}`;
-    navigator.clipboard?.writeText(url).then(() => {
-        showToast('Link copied! 🔗', 'success');
-    }).catch(() => {
-        showToast(url, 'info');
-    });
-}
-
-// Profile page
-async function showPage(page) {
-    if (page === 'profile' && !authToken) {
-        openModal('loginModal');
-        return;
-    }
-    
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(`page-${page}`).classList.add('active');
-    
-    if (page === 'profile') {
-        await loadProfile();
-    } else if (page === 'analytics') {
-        await loadAnalytics();
-    }
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-async function loadProfile() {
-    if (!authToken) return;
-    
-    try {
-        const profile = await apiCall('/profile');
-        const myComplaints = profile.complaints || [];
-        
-        const profileHtml = `
-<div class="profile-banner">
-  <div class="profile-avi">${escapeHtml(profile.user.initials)}</div>
-  <div>
-    <div class="profile-name">${escapeHtml(profile.user.name)} <span class="verified-tick" style="width:18px;height:18px;font-size:10px;">✓</span></div>
-    <div class="profile-location">📍 ${escapeHtml(profile.user.city)}, ${escapeHtml(profile.user.state)} · Joined ${new Date(profile.user.joined).toLocaleDateString()}</div>
-    <div class="profile-stats">
-      <div><span class="pstat-num">${profile.stats.complaints_filed}</span><span class="pstat-label">Filed</span></div>
-      <div><span class="pstat-num">${profile.stats.resolved}</span><span class="pstat-label">Resolved</span></div>
-      <div><span class="pstat-num">${profile.stats.upvotes_received.toLocaleString()}</span><span class="pstat-label">Upvotes received</span></div>
-      <div><span class="pstat-num">${profile.stats.impact_score}</span><span class="pstat-label">Impact score</span></div>
+// ─── DETAIL ───
+function openDetail(id) {
+  const c = DATA.find(x=>x.id===id); if(!c) return;
+  const pct = Math.round(c.up/(c.up+c.dn+1)*100);
+  document.getElementById('detailTitle').textContent = CAT[c.cat] + ' — Complaint';
+  const cmts = [
+    {init:'RS',user:'Rahul S.',text:'I face the exact same issue daily. Worsened since November.',time:'1h ago'},
+    {init:'MJ',user:'Meera J.',text:'Shared to 3 WhatsApp groups. Everyone in our colony agrees.',time:'3h ago'},
+    {init:'🤖',user:'System',text:`Complaint escalated. Reference ID: CMP-2024-${id*1337}`,time:'6h ago'},
+  ];
+  document.getElementById('detailBody').innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <div class="card-avi" style="width:44px;height:44px;font-size:16px;">${c.init}</div>
+      <div>
+        <div style="font-size:15px;font-weight:600;color:var(--ink);">${c.user}${c.verified?` <span class="verified-tick">✓</span>`:''}</div>
+        <div style="font-size:12px;color:var(--ink-4);">${c.time} · ${c.location}</div>
+      </div>
+      <div class="card-badges" style="margin-left:auto;">
+        <span class="badge badge-cat">${CAT[c.cat]||c.cat}</span>
+        ${{open:'<span class="badge badge-open">Open</span>',review:'<span class="badge badge-review">Under Review</span>',resolved:'<span class="badge badge-done">Resolved ✓</span>'}[c.status]}
+      </div>
     </div>
-  </div>
-</div>
-<div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;">My Complaints</div>
-${myComplaints.length ? myComplaints.map(renderCard).join('') : `<div class="empty"><div class="empty-emoji">📝</div><div class="empty-title">No complaints yet</div><div class="empty-sub">Be the voice of change in your community</div><button class="btn-coral" onclick="openComplaintModal()" style="margin-top:18px;padding:12px 24px;">Report first issue</button></div>`}`;
-        
-        document.getElementById('profileWrap').innerHTML = profileHtml;
-    } catch (error) {
-        console.error('Error loading profile:', error);
-        showToast('Failed to load profile', 'error');
-    }
+    <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-0.5px;line-height:1.2;">${c.title}</h2>
+    <p style="font-size:15px;color:var(--ink-3);line-height:1.8;margin-bottom:18px;">${c.body}</p>
+    <div class="card-tags" style="margin-bottom:18px;">${c.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    ${c.proofs.length?`<div class="detail-proof-grid">${c.proofs.map(e=>`<div class="dproof-cell">${e}</div>`).join('')}</div>`:''}
+    ${c.authResp?`<div class="authority-response" style="margin-bottom:18px;"><div class="ar-label">🏛 Official Authority Response</div><div class="ar-text" style="font-size:14px;">${c.authResp}</div></div>`:''}
+    <div style="background:var(--cream);border:1.5px solid var(--cream-3);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:6px;">
+      <button class="vote-btn up" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event,${c.id},'up')">▲ ${c.up.toLocaleString()} Upvotes</button>
+      <div style="flex:1;height:6px;background:var(--cream-3);border-radius:99px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--green);border-radius:99px;"></div></div>
+      <button class="vote-btn down" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event,${c.id},'down')">▼ ${c.dn} Downvotes</button>
+    </div>
+    <div style="text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--ink-5);margin-bottom:20px;">${pct}% of citizens validate this complaint · ID: CMP-2024-${id*1337}</div>
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">💬 Community Discussion (${c.comments})</div>
+    <div class="comment-list">
+      ${cmts.map(cm=>`<div class="comment"><div class="cmt-avi">${cm.init}</div><div><div class="cmt-user">${cm.user}</div><div class="cmt-body">${cm.text}</div><div class="cmt-time">${cm.time}</div></div></div>`).join('')}
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <input class="form-input" placeholder="Add your comment or evidence…" style="flex:1;" onclick="if(!currentUser){closeModal('detailModal');openModal('loginModal');}"/>
+      <button class="btn-fill" style="padding:10px 18px;border-radius:10px;">Post</button>
+    </div>
+  `;
+  openModal('detailModal');
 }
 
-// Modal functions
-function openModal(id, tab) {
-    document.getElementById(id).classList.add('open');
-    if (tab && id === 'loginModal') switchAuth(tab);
+// ─── SIDEBARS ───
+function renderLeaderboard() {
+  const ranks = ['r1','r2','r3','rn','rn'];
+  const nums = ['1','2','3','4','5'];
+  document.getElementById('leaderboard').innerHTML = LEADERBOARD.map((u,i)=>`
+    <div class="lb-item">
+      <span class="lb-rank ${ranks[i]}">${nums[i]}</span>
+      <div class="lb-info">
+        <div class="lb-name">${u.name}${u.v?' <span class="verified-tick" style="display:inline-flex;">✓</span>':''}</div>
+        <div class="lb-sub">${u.sub}</div>
+      </div>
+      <span class="lb-score">${u.score}</span>
+    </div>`).join('');
 }
 
-function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
+function renderTrending() {
+  document.getElementById('trendingTags').innerHTML = TRENDING.map(t=>`
+    <div class="trending-item" onclick="document.querySelector('.nav-search').value='${t.tag}';liveSearch('${t.tag}')">
+      <span class="trend-tag">${t.tag}</span>
+      <span class="trend-count">${t.n} posts</span>
+    </div>`).join('');
 }
 
-function openComplaintModal() {
-    if (!authToken) {
-        openModal('loginModal');
-        showToast('Sign in to report an issue', 'info');
-        return;
-    }
-    openModal('complaintModal');
+function renderResponseBars() {
+  document.getElementById('responseBars').innerHTML = RESP_RATES.map(r=>`
+    <div class="response-bar">
+      <div class="rb-header"><span>${r.dept}</span><span class="rb-pct">${r.pct}%</span></div>
+      <div class="rb-track"><div class="rb-fill" style="width:${r.pct}%;background:${r.color};"></div></div>
+    </div>`).join('');
 }
 
+function renderAnalytics() {
+  const cats = [
+    {n:'Transport',v:3247,c:'var(--sky)'},{n:'Roads',v:2841,c:'var(--saffron)'},
+    {n:'Corruption',v:2134,c:'var(--coral)'},{n:'Water',v:1893,c:'var(--sky)'},
+    {n:'Electricity',v:1421,c:'#f5a623'},{n:'Health',v:891,c:'var(--green)'},
+    {n:'Education',v:420,c:'#9b5de5'},
+  ];
+  const max = 3247;
+  const el = document.getElementById('analyticsBars');
+  if(!el) return;
+  el.innerHTML = cats.map(c=>`
+    <div style="margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:500;color:var(--ink-2);margin-bottom:5px;"><span>${c.n}</span><span style="font-family:var(--font-mono);font-size:11px;">${c.v.toLocaleString()}</span></div>
+      <div class="rb-track"><div class="rb-fill" style="width:${Math.round(c.v/max*100)}%;background:${c.c};"></div></div>
+    </div>`).join('');
+
+  const cities = [
+    {n:'Delhi NCR',v:3421},{n:'Mumbai',v:2847},{n:'Bengaluru',v:1943},
+    {n:'Ahmedabad',v:1234},{n:'Kolkata',v:987},{n:'Pune',v:821},
+  ];
+  const cr = document.getElementById('cityRanks');
+  if(!cr) return;
+  cr.innerHTML = cities.map((c,i)=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-3);">
+      <span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--ink-5);width:24px;text-align:center;">${i+1}</span>
+      <span style="font-size:14px;font-weight:500;color:var(--ink);flex:1;">${c.n}</span>
+      <span style="font-family:var(--font-mono);font-size:12px;color:var(--coral);">${c.v.toLocaleString()}</span>
+    </div>`).join('');
+}
+
+// ─── PROFILE ───
+function renderProfile() {
+  const el = document.getElementById('profileWrap'); if(!el) return;
+  const my = DATA.filter(c => c.user === currentUser?.name);
+  el.innerHTML = `
+    <div class="profile-banner">
+      <div class="profile-avi">${currentUser.init}</div>
+      <div>
+        <div class="profile-name">${currentUser.name} <span class="verified-tick" style="width:18px;height:18px;font-size:10px;">✓</span></div>
+        <div class="profile-location">📍 ${currentUser.city||'India'} · Joined March 2024</div>
+        <div class="profile-stats">
+          <div><span class="pstat-num">${my.length}</span><span class="pstat-label">Filed</span></div>
+          <div><span class="pstat-num">1</span><span class="pstat-label">Resolved</span></div>
+          <div><span class="pstat-num">${my.reduce((a,c)=>a+c.up,0).toLocaleString()}</span><span class="pstat-label">Upvotes received</span></div>
+          <div><span class="pstat-num">2,847</span><span class="pstat-label">Impact score</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;">My Complaints</div>
+    ${my.length ? my.map(renderCard).join('') : `<div class="empty"><div class="empty-emoji">📝</div><div class="empty-title">No complaints yet</div><div class="empty-sub">Be the voice of change in your community</div><button class="btn-coral" onclick="openComplaintModal()" style="margin-top:18px;padding:12px 24px;">Report first issue</button></div>`}
+  `;
+}
+
+// ─── AUTH ───
 function switchAuth(tab) {
-    document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
-    document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
-    document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
-    document.getElementById('registerTabBtn').classList.toggle('active', tab === 'register');
+  document.getElementById('loginForm').style.display = tab==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = tab==='register'?'block':'none';
+  document.getElementById('loginTabBtn').classList.toggle('active', tab==='login');
+  document.getElementById('registerTabBtn').classList.toggle('active', tab==='register');
 }
 
-// Toast notifications
-function showToast(msg, type = 'info') {
-    const icons = { success: '✓', error: '✕', info: '→' };
-    const t = document.createElement('div');
-    t.className = `toast ${type}`;
-    t.innerHTML = `<span class="toast-icon">${icons[type]}</span>${escapeHtml(msg)}`;
-    document.getElementById('toastStack').appendChild(t);
-    setTimeout(() => {
-        t.style.opacity = '0';
-        t.style.transform = 'translateX(40px)';
-        setTimeout(() => t.remove(), 350);
-    }, 3200);
+function doLogin() {
+  const email = document.getElementById('lEmail').value;
+  if (!email) { showToast('Please enter your email','error'); return; }
+  loginAs({ name:'Dev Parmar', init:'DP', email, city:'Anand, Gujarat' });
+  closeModal('loginModal');
+  showToast('Welcome back, Dev! 👋','success');
 }
 
-// Close modals when clicking overlay
-document.querySelectorAll('.overlay').forEach(o => {
-    o.addEventListener('click', e => {
-        if (e.target === o) o.classList.remove('open');
-    });
-});
-
-// Initialize app
-async function initApp() {
-    // Check for stored token
-    authToken = localStorage.getItem('authToken');
-    
-    if (authToken) {
-        try {
-            const user = await apiCall('/auth/me');
-            currentUser = user;
-            document.getElementById('authBtns').style.display = 'none';
-            document.getElementById('userBtns').style.display = 'flex';
-            document.getElementById('navAvatar').textContent = currentUser.initials;
-        } catch (error) {
-            console.error('Session expired:', error);
-            localStorage.removeItem('authToken');
-            authToken = null;
-        }
-    }
-    
-    // Load initial data
-    await loadComplaints(true);
-    await loadLeaderboard();
-    await loadTrendingTags();
-    await loadResponseRates();
-    await loadAnalytics();
-    
-    // Animate stats (for hero numbers that may come from backend)
-    animateStats();
+function doRegister() {
+  const f = document.getElementById('rFirst').value;
+  const l = document.getElementById('rLast').value;
+  const e = document.getElementById('rEmail').value;
+  if (!f || !e) { showToast('Please fill required fields','error'); return; }
+  loginAs({ name:f+' '+l, init:(f[0]+(l[0]||'')).toUpperCase(), email:e, city:(document.getElementById('rCity').value||'India') });
+  closeModal('loginModal');
+  showToast(`Account created! Welcome, ${f} 🎉`,'success');
 }
 
-// Simple stats animation (for hero numbers that are already set)
+function doOAuth(p) {
+  loginAs({ name:'Dev Parmar', init:'DP', email:'dev@example.com', city:'Anand, Gujarat' });
+  closeModal('loginModal');
+  showToast(`Logged in via ${p} ✓`,'success');
+}
+
+function loginAs(u) {
+  currentUser = u;
+  document.getElementById('authBtns').style.display = 'none';
+  document.getElementById('userBtns').style.display = 'flex';
+  document.getElementById('navAvatar').textContent = u.init;
+  document.getElementById('navAvatar').insertAdjacentHTML('beforeend','<div class="notif-pip"></div>');
+}
+
+// ─── COMPLAINT ───
+function openComplaintModal() {
+  if (!currentUser) { openModal('loginModal'); showToast('Sign in to report an issue','info'); return; }
+  openModal('complaintModal');
+}
+
+function handleFiles(inp) {
+  const chips = document.getElementById('fileChips');
+  chips.innerHTML = '';
+  Array.from(inp.files).forEach(f => {
+    const ic = f.type.startsWith('image')?'🖼️':f.type.startsWith('video')?'🎬':'📄';
+    const d = document.createElement('div');
+    d.className = 'file-chip';
+    d.innerHTML = `${ic} ${f.name.slice(0,18)}`;
+    chips.appendChild(d);
+  });
+  if (inp.files.length) showToast(`${inp.files.length} file(s) attached`,'success');
+}
+
+function submitComplaint() {
+  const title = document.getElementById('cTitle').value.trim();
+  const cat   = document.getElementById('cCat').value;
+  const desc  = document.getElementById('cDesc').value.trim();
+  if (!title || !cat || !desc) { showToast('Please fill all required fields','error'); return; }
+  const city = document.getElementById('cCity').value.trim();
+  const state = document.getElementById('cState').value;
+  const tags = document.getElementById('cTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const urgency = document.getElementById('cUrgency').value;
+
+  DATA.unshift({
+    id: Date.now(), user: currentUser.name, init: currentUser.init,
+    verified: false, time: 'Just now', cat, title, body: desc,
+    location: (city||'Unknown')+', '+state, tags, urgency,
+    up:1, dn:0, comments:0, status:'open',
+    proofs: document.getElementById('fileInput').files.length ? ['📎'] : [],
+    viral:false, pinned:false,
+  });
+  closeModal('complaintModal');
+  renderFeed();
+  showToast('Complaint filed! ID: CMP-' + Math.random().toString(36).slice(2,8).toUpperCase(), 'success');
+  ['cTitle','cCat','cDesc','cCity','cTags'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('fileChips').innerHTML = '';
+}
+
+// ─── SHARE / FOLLOW ───
+function shareC(e,id) {
+  e.stopPropagation();
+  navigator.clipboard?.writeText(location.href+'?c='+id).then(()=>showToast('Link copied! 🔗','success')).catch(()=>showToast('complaints.in/?c='+id,'info'));
+}
+function followC(e,id) {
+  e.stopPropagation();
+  if (!currentUser) { openModal('loginModal'); return; }
+  showToast('Following this complaint 🔔','success');
+}
+
+// ─── MODAL ───
+function openModal(id, tab) {
+  document.getElementById(id).classList.add('open');
+  if (tab && id==='loginModal') switchAuth(tab);
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); }));
+
+// ─── TOAST ───
+function showToast(msg, type='info') {
+  const icons = { success:'✓', error:'✕', info:'→' };
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span class="toast-icon">${icons[type]}</span>${msg}`;
+  document.getElementById('toastStack').appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(40px)'; setTimeout(()=>t.remove(),350); }, 3200);
+}
+
+// ─── STAT ANIMATION ───
 function animateStats() {
-    const targets = [
-        { id: 's1', to: parseInt(document.getElementById('s1').innerText) || 12847, fmt: v => v.toLocaleString() },
-        { id: 's2', to: parseInt(document.getElementById('s2').innerText) || 3241, fmt: v => v.toLocaleString() },
-        { id: 's3', to: parseInt(document.getElementById('s3').innerText) || 247, fmt: v => v.toString() },
-        { id: 's4', to: parseInt(document.getElementById('s4').innerText) || 89, fmt: v => v + 'K' }
-    ];
-    
-    targets.forEach(({ id, to, fmt }) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        let v = 0;
-        const step = Math.ceil(to / 55);
-        const iv = setInterval(() => {
-            v = Math.min(v + step, to);
-            el.textContent = fmt(v);
-            if (v >= to) clearInterval(iv);
-        }, 22);
-    });
+  const targets = [
+    {id:'s1', to:12847, fmt: v => v.toLocaleString()},
+    {id:'s2', to:3241, fmt: v => v.toLocaleString()},
+    {id:'s3', to:247, fmt: v => v.toString()},
+    {id:'s4', to:89, fmt: v => v+'K'},
+    {id:'a1', to:12847, fmt: v => v.toLocaleString()},
+    {id:'a4', to:4700000, fmt: v => (v/1000000).toFixed(1)+'M'},
+  ];
+  targets.forEach(({ id, to, fmt }) => {
+    const el = document.getElementById(id); if (!el) return;
+    let v = 0;
+    const step = Math.ceil(to / 55);
+    const iv = setInterval(() => {
+      v = Math.min(v + step, to);
+      el.textContent = fmt(v);
+      if (v >= to) clearInterval(iv);
+    }, 22);
+  });
 }
-
-// Start the app
-window.addEventListener('DOMContentLoaded', initApp);
 </script>
 </body>
 </html>
