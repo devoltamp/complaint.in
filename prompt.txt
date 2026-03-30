@@ -1,0 +1,19 @@
+The idea behind complaints.in
+
+>> Suppose I have a complaint about something that I would like to get fixed but it's related to government or any other authorization.
+
+It takes a lot of time to have some changes in the govt. processes. So, complaint.com will just speed up the process a lot (a transparent process)
+
+
+
+
+How does it work?
+
+let's say you have a complaint about train frequency in your area, what you'll have to do is that just upload some proof & describe your complaint. & not just that it'll also have something called the upvote and the down-vote & the post will go public, according to the location people can give upvote if the complaint is valid and a down-vote it it's not valid. And accordingly the government and the authorization can do their part of the job. (Image)
+
+Note;
+
+The site isn’t live yet — it’s still just an idea for now — but I’m really excited to bring it to life. I truly believe it has potential, and I’d love to team up with great minds to make it happen. Feel free to reach out.
+
+
+make out the full working website with user details login and all backend and all make the ui so mordern it should have all the features and and also you can add some more features you would like

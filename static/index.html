@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>complaints.in</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ... [Keep all your existing CSS styles exactly as they are] ... */
+  /* Copy all the CSS from your original file here */
+  :root {
+  --cream: #faf7f2;
+  --cream-2: #f3ede3;
+  --cream-3: #ede4d6;
+  --ink: #0f0d0a;
+  --ink-2: #2a2520;
+  --ink-3: #5a524a;
+  --ink-4: #9a9088;
+  --ink-5: #ccc4b8;
+  --coral: #e85c3a;
+  --coral-light: #f27a5e;
+  --coral-bg: #fdf0ec;
+  --saffron: #f5a623;
+  --green: #2a9d5c;
+  --green-bg: #edf7f2;
+  --sky: #3a7bd5;
+  --sky-bg: #eef3fc;
+  --red: #d93025;
+  --red-bg: #fdf0ef;
+  --shadow-sm: 0 1px 4px rgba(15,13,10,0.06), 0 4px 16px rgba(15,13,10,0.04);
+  --shadow-md: 0 4px 12px rgba(15,13,10,0.08), 0 16px 40px rgba(15,13,10,0.06);
+  --shadow-lg: 0 8px 24px rgba(15,13,10,0.1), 0 32px 64px rgba(15,13,10,0.08);
+  --r: 16px;
+  --r-sm: 10px;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+ 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+html { scroll-behavior: smooth; }
+ 
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+ 
+/* ── NOISE TEXTURE ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+ 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-2); }
+::-webkit-scrollbar-thumb { background: var(--ink-5); border-radius: 99px; }
+ 
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 247, 242, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--cream-3);
+  height: 64px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+ 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+ 
+.logo-mark {
+  width: 34px; height: 34px;
+  background: var(--ink);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--cream);
+  letter-spacing: -1px;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+ 
+.nav-logo:hover .logo-mark { transform: rotate(-6deg) scale(1.08); }
+ 
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+ 
+.logo-text span { color: var(--coral); }
+ 
+.nav-center {
+  flex: 1;
+  max-width: 380px;
+  position: relative;
+}
+ 
+.nav-search {
+  width: 100%;
+  background: var(--cream-2);
+  border: 1.5px solid var(--cream-3);
+  border-radius: 99px;
+  padding: 9px 18px 9px 40px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: all 0.25s;
+}
+ 
+.nav-search:focus {
+  background: #fff;
+  border-color: var(--ink-5);
+  box-shadow: 0 0 0 3px rgba(15,13,10,0.05);
+}
+ 
+.nav-search::placeholder { color: var(--ink-4); }
+ 
+.search-icon-nav {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-4);
+  font-size: 15px;
+  pointer-events: none;
+}
+ 
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+ 
+.btn-ghost {
+  background: none;
+  border: 1.5px solid var(--cream-3);
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+ 
+.btn-ghost:hover { background: var(--cream-2); border-color: var(--ink-5); }
+ 
+.btn-fill {
+  background: var(--ink);
+  color: var(--cream);
+  border: 1.5px solid var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+}
+ 
+.btn-fill:hover { background: var(--ink-2); transform: scale(1.03); }
+ 
+.btn-coral {
+  background: var(--coral);
+  color: #fff;
+  border: 1.5px solid var(--coral);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+ 
+.btn-coral:hover { background: var(--coral-light); transform: scale(1.03); box-shadow: 0 4px 20px rgba(232,92,58,0.35); }
+ 
+.avatar-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid var(--cream-3);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
+ 
+.avatar-btn:hover { border-color: var(--ink); }
+ 
+.notif-pip {
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 10px; height: 10px;
+  background: var(--coral);
+  border-radius: 50%;
+  border: 2px solid var(--cream);
+  animation: pip-pulse 2s infinite;
+}
+ 
+@keyframes pip-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+ 
+/* ══════════════════════════════════════
+   PAGE / ROUTING
+══════════════════════════════════════ */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: pg-in 0.45s cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+ 
+@keyframes pg-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  padding: 72px 32px 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: center;
+}
+ 
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--coral-bg);
+  border: 1px solid rgba(232,92,58,0.2);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--coral);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+ 
+.live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--coral);
+  animation: pip-pulse 1.5s infinite;
+}
+ 
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+ 
+.hero h1 em {
+  font-style: italic;
+  color: var(--coral);
+}
+ 
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--ink-3);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+ 
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+ 
+.hero-ctas .btn-coral { padding: 13px 28px; font-size: 15px; }
+.hero-ctas .btn-ghost { padding: 13px 28px; font-size: 15px; }
+ 
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--cream-3);
+}
+ 
+.hstat-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+ 
+.hstat-label {
+  font-size: 12px;
+  color: var(--ink-4);
+  font-weight: 400;
+}
+ 
+/* HERO RIGHT — Live card stack */
+.hero-visual {
+  position: relative;
+  height: 380px;
+}
+ 
+.floating-card {
+  position: absolute;
+  background: #fff;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-md);
+  padding: 18px 20px;
+  border: 1px solid var(--cream-3);
+  transition: transform 0.4s ease;
+  animation: float-card 6s ease-in-out infinite;
+}
+ 
+.floating-card:nth-child(1) {
+  left: 0; top: 20px;
+  width: 310px;
+  animation-delay: 0s;
+  z-index: 3;
+}
+ 
+.floating-card:nth-child(2) {
+  right: 0; top: 80px;
+  width: 260px;
+  animation-delay: -2s;
+  z-index: 2;
+}
+ 
+.floating-card:nth-child(3) {
+  left: 30px; bottom: 30px;
+  width: 280px;
+  animation-delay: -4s;
+  z-index: 1;
+}
+ 
+@keyframes float-card {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-8px) rotate(0.5deg); }
+  66%       { transform: translateY(4px) rotate(-0.3deg); }
+}
+ 
+.fc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+ 
+.fc-tag.transport { background: var(--sky-bg); color: var(--sky); }
+.fc-tag.water     { background: var(--green-bg); color: var(--green); }
+.fc-tag.roads     { background: #fff8ec; color: #c47a00; }
+ 
+.fc-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+ 
+.fc-votes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+ 
+.vote-up { color: var(--green); }
+.vote-dn { color: var(--ink-4); }
+ 
+.fc-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--cream-3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+ 
+.fc-bar-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 99px;
+}
+ 
+/* ══════════════════════════════════════
+   MAIN FEED LAYOUT
+══════════════════════════════════════ */
+.feed-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+  display: grid;
+  grid-template-columns: 240px 1fr 260px;
+  gap: 32px;
+}
+ 
+/* ── SIDEBAR LEFT ── */
+.sidebar-left, .sidebar-right {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+ 
+.sideblock {
+  background: #fff;
+  border: 1px solid var(--cream-3);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+ 
+.sideblock-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--cream-3);
+}
+ 
+.filter-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px; }
+ 
+.pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1.5px solid var(--cream-3);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+ 
+.pill:hover { border-color: var(--ink-4); color: var(--ink); }
+.pill.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+ 
+.cat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 0.18s;
+  border-bottom: 1px solid var(--cream-3);
+}
+ 
+.cat-item:last-child { border-bottom: none; }
+.cat-item:hover { background: var(--cream-2); color: var(--ink); }
+.cat-item.active { color: var(--coral); background: var(--coral-bg); }
+ 
+.cat-icon { font-size: 16px; }
+.cat-count { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
+ 
+/* ── FEED CENTER ── */
+.feed-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid var(--cream-3);
+}
+ 
+.tab-row { display: flex; gap: 4px; }
+ 
+.tab-pill {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  color: var(--ink-4);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+ 
+.tab-pill:hover { color: var(--ink); background: var(--cream-2); }
+.tab-pill.active { background: var(--ink); color: var(--cream); }
+ 
+.sort-select {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 13px;
+  background: var(--cream-2);
+  border: 1.5px solid var(--cream-3);
+  color: var(--ink);
+  padding: 7px 14px;
+  border-radius: 99px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+ 
+/* ── COMPLAINT CARD ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--cream-3);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1), border-color 0.2s;
+  animation: card-in 0.5s cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+ 
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--ink-5);
+}
+ 
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.10s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.20s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+ 
+/* Urgency stripe on left */
+.card-inner {
+  display: flex;
+}
+ 
+.urgency-stripe {
+  width: 4px;
+  flex-shrink: 0;
+}
+ 
+.urgency-stripe.critical { background: var(--red); }
+.urgency-stripe.high     { background: var(--saffron); }
+.urgency-stripe.medium   { background: var(--sky); }
+.urgency-stripe.low      { background: var(--green); }
+ 
+.card-body-wrap { flex: 1; padding: 20px 22px; }
+ 
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+ 
+.card-avi {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+ 
+.card-user-info { flex: 1; }
+ 
+.card-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+ 
+.verified-tick {
+  width: 14px; height: 14px;
+  background: var(--sky);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+}
+ 
+.card-time {
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-top: 1px;
+}
+ 
+.card-badges { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+ 
+.badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 5px;
+  letter-spacing: 0.3px;
+}
+ 
+.badge-cat   { background: var(--cream-2); color: var(--ink-3); }
+.badge-open  { background: var(--green-bg); color: var(--green); }
+.badge-review{ background: #fff8ec; color: #c47a00; }
+.badge-done  { background: var(--sky-bg); color: var(--sky); }
+.badge-viral { background: var(--coral-bg); color: var(--coral); }
+.badge-pin   { background: var(--cream-2); color: var(--ink-3); }
+ 
+.card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+ 
+.card-excerpt {
+  font-size: 14px;
+  color: var(--ink-3);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+ 
+.card-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--ink-4);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+ 
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+ 
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  background: var(--cream-2);
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+ 
+/* proof thumbs */
+.proof-row { display: flex; gap: 8px; margin-bottom: 14px; }
+ 
+.proof-thumb {
+  width: 72px; height: 52px;
+  border-radius: 8px;
+  background: var(--cream-2);
+  border: 1px solid var(--cream-3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+ 
+.proof-thumb:hover { transform: scale(1.05); }
+ 
+/* authority response */
+.authority-response {
+  background: var(--sky-bg);
+  border-left: 3px solid var(--sky);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+ 
+.ar-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 4px;
+}
+ 
+.ar-text { color: var(--ink-3); }
+ 
+/* card footer */
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-top: 1px solid var(--cream-3);
+  background: var(--cream);
+}
+ 
+.vote-group {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--cream-3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+ 
+.vote-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 7px 14px;
+  transition: all 0.18s;
+  color: var(--ink-3);
+}
+ 
+.vote-btn:hover { background: var(--cream-2); }
+ 
+.vote-btn.up:hover, .vote-btn.up.voted { color: var(--green); }
+.vote-btn.down:hover, .vote-btn.down.voted { color: var(--red); }
+ 
+.vote-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--cream-3);
+}
+ 
+.foot-btn {
+  background: none;
+  border: 1.5px solid var(--cream-3);
+  border-radius: 99px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-4);
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex; align-items: center; gap: 5px;
+}
+ 
+.foot-btn:hover { border-color: var(--ink-4); color: var(--ink); background: var(--cream-2); }
+ 
+.vote-pct {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-left: auto;
+}
+ 
+/* ── SIDEBAR RIGHT ── */
+.lb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--cream-3);
+  transition: background 0.18s;
+  cursor: pointer;
+}
+ 
+.lb-item:last-child { border-bottom: none; }
+.lb-item:hover { background: var(--cream-2); }
+ 
+.lb-rank {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  width: 28px;
+  text-align: center;
+}
+ 
+.lb-rank.r1 { color: #d4a017; }
+.lb-rank.r2 { color: #8e9eab; }
+.lb-rank.r3 { color: #c07038; }
+.lb-rank.rn { color: var(--ink-5); font-size: 13px; }
+ 
+.lb-info { flex: 1; }
+.lb-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.lb-sub  { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); }
+.lb-score { font-family: var(--font-mono); font-size: 12px; color: var(--coral); font-weight: 500; }
+ 
+.trending-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--cream-3);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+ 
+.trending-item:last-child { border-bottom: none; }
+.trending-item:hover { background: var(--cream-2); }
+.trend-tag { font-size: 13px; font-weight: 500; color: var(--sky); }
+.trend-count { font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
+ 
+.response-bar {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--cream-3);
+}
+ 
+.response-bar:last-child { border-bottom: none; }
+ 
+.rb-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+ 
+.rb-pct { font-family: var(--font-mono); font-size: 11px; }
+ 
+.rb-track {
+  height: 5px;
+  background: var(--cream-3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+ 
+.rb-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--green);
+  transition: width 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+ 
+/* ══════════════════════════════════════
+   MODALS
+══════════════════════════════════════ */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,13,10,0.5);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+ 
+.overlay.open { display: flex; }
+ 
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: modal-in 0.4s cubic-bezier(0.34,1.2,0.64,1) both;
+  border: 1px solid var(--cream-3);
+}
+ 
+.modal.wide { max-width: 700px; }
+ 
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.94) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+ 
+.modal-header {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--cream-3);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+ 
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+ 
+.modal-close {
+  background: var(--cream-2);
+  border: none;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  transition: all 0.2s;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+ 
+.modal-close:hover { background: var(--cream-3); color: var(--ink); }
+ 
+.modal-body { padding: 24px 28px; }
+ 
+/* form */
+.form-group { margin-bottom: 18px; }
+ 
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+ 
+.form-input {
+  width: 100%;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-3);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.22s;
+  line-height: 1.5;
+}
+ 
+.form-input:focus {
+  background: #fff;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(15,13,10,0.06);
+}
+ 
+.form-input::placeholder { color: var(--ink-5); }
+ 
+textarea.form-input { resize: vertical; min-height: 110px; }
+ 
+select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer; }
+ 
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+ 
+.upload-zone {
+  border: 2px dashed var(--cream-3);
+  border-radius: 12px;
+  padding: 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+ 
+.upload-zone:hover {
+  border-color: var(--ink-4);
+  background: var(--cream);
+}
+ 
+.upload-emoji { font-size: 32px; margin-bottom: 10px; }
+.upload-label { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 4px; }
+.upload-hint  { font-size: 12px; color: var(--ink-4); }
+ 
+.file-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+ 
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--cream-2);
+  border: 1px solid var(--cream-3);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--ink-3);
+  animation: chip-in 0.3s cubic-bezier(0.34,1.4,0.64,1) both;
+}
+ 
+@keyframes chip-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+ 
+/* auth tabs */
+.auth-switch {
+  display: flex;
+  background: var(--cream-2);
+  border-radius: 99px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+ 
+.auth-switch-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.22s;
+  color: var(--ink-4);
+}
+ 
+.auth-switch-btn.active {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(15,13,10,0.1);
+}
+ 
+.oauth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+ 
+.oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--cream-2);
+  border: 1.5px solid var(--cream-3);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+ 
+.oauth-btn:hover { border-color: var(--ink-4); background: var(--cream); }
+ 
+.divider-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-5);
+  margin: 18px 0;
+}
+ 
+.divider-or::before, .divider-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--cream-3);
+}
+ 
+/* ── DETAIL MODAL ── */
+.detail-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+ 
+.dproof-cell {
+  aspect-ratio: 16/10;
+  border-radius: 10px;
+  background: var(--cream-2);
+  border: 1px solid var(--cream-3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+ 
+.dproof-cell:hover { transform: scale(1.03); box-shadow: var(--shadow-md); }
+ 
+.comment-list { margin-top: 20px; }
+ 
+.comment {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--cream-3);
+}
+ 
+.comment:last-child { border-bottom: none; }
+ 
+.cmt-avi {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+ 
+.cmt-user { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.cmt-body { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+.cmt-time { font-size: 11px; color: var(--ink-5); margin-top: 4px; }
+ 
+/* ── TOAST ── */
+.toast-stack {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+ 
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 12px;
+  padding: 14px 18px;
+  min-width: 280px;
+  box-shadow: 0 8px 32px rgba(15,13,10,0.2);
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: auto;
+  animation: toast-in 0.4s cubic-bezier(0.34,1.3,0.64,1) both;
+  transition: opacity 0.3s, transform 0.3s;
+}
+ 
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(60px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+ 
+.toast-icon { font-size: 18px; flex-shrink: 0; }
+.toast.success .toast-icon::before { content: '✓'; }
+.toast.error   .toast-icon::before { content: '✕'; }
+.toast.info    .toast-icon::before { content: '→'; }
+ 
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 52px; height: 52px;
+  background: var(--coral);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(232,92,58,0.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  z-index: 50;
+}
+ 
+.fab:hover {
+  transform: scale(1.12) rotate(45deg);
+  box-shadow: 0 8px 32px rgba(232,92,58,0.55);
+}
+ 
+/* ── ANALYTICS PAGE ── */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+ 
+.acard {
+  background: #fff;
+  border: 1px solid var(--cream-3);
+  border-radius: var(--r);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+ 
+.acard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+ 
+.acard-num {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+ 
+.acard-label { font-size: 12px; color: var(--ink-4); font-weight: 400; }
+.acard-delta { font-family: var(--font-mono); font-size: 11px; margin-top: 8px; }
+.delta-up   { color: var(--green); }
+.delta-dn   { color: var(--red); }
+ 
+/* ── MAP PAGE ── */
+.map-container {
+  background: #fff;
+  border: 1px solid var(--cream-3);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+ 
+/* ── PROFILE ── */
+.profile-banner {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
+  border-radius: var(--r);
+  padding: 36px;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+ 
+.profile-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+ 
+.profile-avi {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--coral);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+ 
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+ 
+.profile-location { font-size: 13px; opacity: 0.6; margin-bottom: 16px; }
+ 
+.profile-stats { display: flex; gap: 28px; }
+.pstat-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; display: block; }
+.pstat-label { font-size: 11px; opacity: 0.55; }
+ 
+/* ── EMPTY STATE ── */
+.empty {
+  text-align: center;
+  padding: 64px 32px;
+}
+ 
+.empty-emoji { font-size: 52px; margin-bottom: 16px; }
+.empty-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.empty-sub   { font-size: 14px; color: var(--ink-4); }
+ 
+/* ── SECTION HEADER ── */
+.section-header {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 0 32px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.ticker-bar {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 8px 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+ 
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 30s linear infinite;
+}
+ 
+@keyframes ticker {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+ 
+.hero-divider {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  border: none;
+  border-top: 1.5px solid var(--cream-3);
+  margin-bottom: 24px;
+}
+ 
+@media (max-width: 1100px) {
+  .feed-wrapper { grid-template-columns: 1fr; }
+  .sidebar-left, .sidebar-right { position: static; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+}
+ 
+@media (max-width: 768px) {
+  nav { padding: 0 16px; gap: 12px; }
+  .nav-center { display: none; }
+  .hero { padding: 40px 16px 36px; }
+  .feed-wrapper { padding: 0 16px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <span class="ticker-inner">
+    🔴 LIVE &nbsp;·&nbsp; 2,847 complaints filed today &nbsp;·&nbsp; 134 resolved &nbsp;·&nbsp; Railway delays in Ahmedabad trending ↑ &nbsp;·&nbsp; Water shortage Bopal hits 963 upvotes &nbsp;·&nbsp; NH-48 pothole report verified by 724 citizens &nbsp;·&nbsp; Corruption report Gandhinagar: 2,341 upvotes &nbsp;·&nbsp; Power cuts Surat resolved by DGVCL &nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="logo-mark">C!</div>
+    <span class="logo-text">complaints<span>.in</span></span>
+  </div>
+  <div class="nav-center">
+    <span class="search-icon-nav">🔍</span>
+    <input class="nav-search" type="text" placeholder="Search complaints, locations, issues…" oninput="liveSearch(this.value)"/>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-ghost" onclick="showPage('analytics')">Analytics</button>
+    <button class="btn-ghost" onclick="showPage('map')">Map View</button>
+    <div id="authBtns">
+      <button class="btn-ghost" onclick="openModal('loginModal')" style="margin-right:8px;">Sign in</button>
+      <button class="btn-fill" onclick="openModal('loginModal','register')">Join free</button>
+    </div>
+    <div id="userBtns" style="display:none;align-items:center;gap:8px;">
+      <button class="btn-coral" onclick="openComplaintModal()">
+        <span>＋</span> Report Issue
+      </button>
+      <div class="avatar-btn" id="navAvatar" onclick="showPage('profile')">
+        DP
+        <div class="notif-pip"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGES ── -->
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-kicker"><div class="live-dot"></div> Civic Platform · India</div>
+      <h1>Your voice.<br>Their <em>accountability.</em></h1>
+      <p class="hero-sub">File complaints about government and civic issues. Let your community validate them — and push the right authorities to act.</p>
+      <div class="hero-ctas">
+        <button class="btn-coral" onclick="openComplaintModal()" style="padding:13px 28px;font-size:15px;">＋ Report an Issue</button>
+        <button class="btn-ghost" onclick="document.getElementById('feedSection').scrollIntoView({behavior:'smooth'})" style="padding:13px 28px;font-size:15px;">Browse feed ↓</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hstat-num" id="s1">0</span>
+          <span class="hstat-label">Complaints filed</span>
+        </div>
+        <div>
+          <span class="hstat-num" id="s2">0</span>
+          <span class="hstat-label">Resolved</span>
+        </div>
+        <div>
+          <span class="hstat-num" id="s3">0</span>
+          <span class="hstat-label">Cities active</span>
+        </div>
+        <div>
+          <span class="hstat-num" id="s4">0</span>
+          <span class="hstat-label">Citizens</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING CARDS -->
+    <div class="hero-visual">
+      <div class="floating-card">
+        <div class="fc-tag transport">🚆 Transport</div>
+        <div class="fc-title">Train frequency on Ahmedabad–Mumbai route cut by 40%</div>
+        <div class="fc-votes">
+          <span class="vote-up">▲ 1,842</span>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:97%"></div></div>
+          <span class="vote-dn">▼ 42</span>
+        </div>
+      </div>
+      <div class="floating-card">
+        <div class="fc-tag water">💧 Water</div>
+        <div class="fc-title">No water supply for 72 hrs in Bopal Ward 14</div>
+        <div class="fc-votes">
+          <span class="vote-up">▲ 963</span>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:98%"></div></div>
+          <span class="vote-dn">▼ 12</span>
+        </div>
+      </div>
+      <div class="floating-card">
+        <div class="fc-tag roads">🛣️ Roads</div>
+        <div class="fc-title">NH-48 potholes causing accidents near Vadodara</div>
+        <div class="fc-votes">
+          <span class="vote-up">▲ 724</span>
+          <div class="fc-bar"><div class="fc-bar-fill" style="width:95%"></div></div>
+          <span class="vote-dn">▼ 31</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hero-divider">
+
+  <!-- FEED -->
+  <div class="feed-wrapper" id="feedSection">
+    <!-- LEFT -->
+    <aside class="sidebar-left">
+      <div class="sideblock">
+        <div class="sideblock-title">Sort By</div>
+        <div class="filter-pills">
+          <div class="pill active" onclick="setSort(this,'latest')">Latest</div>
+          <div class="pill" onclick="setSort(this,'trending')">Trending 🔥</div>
+          <div class="pill" onclick="setSort(this,'critical')">Critical</div>
+          <div class="pill" onclick="setSort(this,'resolved')">Resolved</div>
+        </div>
+      </div>
+      <div class="sideblock">
+        <div class="sideblock-title">Category</div>
+        <div class="cat-item active" onclick="setCat(this,'all')"><span class="cat-icon">📋</span> All Issues <span class="cat-count">6</span></div>
+        <div class="cat-item" onclick="setCat(this,'transport')"><span class="cat-icon">🚆</span> Transport <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'roads')"><span class="cat-icon">🛣️</span> Roads <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'water')"><span class="cat-icon">💧</span> Water <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'electricity')"><span class="cat-icon">⚡</span> Electricity <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'corruption')"><span class="cat-icon">🔍</span> Corruption <span class="cat-count">1</span></div>
+        <div class="cat-item" onclick="setCat(this,'education')"><span class="cat-icon">🎓</span> Education <span class="cat-count">1</span></div>
+      </div>
+      <div class="sideblock">
+        <div class="sideblock-title">State</div>
+        <div style="padding:12px;">
+          <select class="form-input" style="font-size:13px;padding:8px 12px;" onchange="filterByState(this.value)">
+            <option value="">All India</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+          </select>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FEED -->
+    <main>
+      <div id="feedContainer"></div>
+      <div style="text-align:center;padding:8px 0 24px;">
+        <button class="btn-ghost" onclick="loadMoreComplaints()" style="padding:11px 28px;">Load more</button>
+      </div>
+    </main>
+
+    <!-- RIGHT -->
+    <aside class="sidebar-right">
+      <div class="sideblock">
+        <div class="sideblock-title">Top Citizens</div>
+        <div id="leaderboard"></div>
+      </div>
+      <div class="sideblock">
+        <div class="sideblock-title">Trending Tags</div>
+        <div id="trendingTags"></div>
+      </div>
+      <div class="sideblock">
+        <div class="sideblock-title">Govt. Response Rate</div>
+        <div id="responseBars"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ANALYTICS -->
+<div id="page-analytics" class="page">
+  <div style="max-width:1100px;margin:0 auto;padding:36px 32px 80px;">
+    <div style="margin-bottom:32px;">
+      <h2 style="font-family:var(--font-display);font-size:32px;font-weight:700;letter-spacing:-1px;color:var(--ink);margin-bottom:6px;">National Analytics</h2>
+      <p style="color:var(--ink-4);font-size:14px;">Real-time overview of civic complaints across India.</p>
+    </div>
+    <div class="analytics-grid">
+      <div class="acard">
+        <div class="acard-num" id="a1">0</div>
+        <div class="acard-label">Total Complaints</div>
+        <div class="acard-delta delta-up">↑ +14% this week</div>
+      </div>
+      <div class="acard">
+        <div class="acard-num" id="a2">0%</div>
+        <div class="acard-label">Resolution Rate</div>
+        <div class="acard-delta delta-up" id="resolutionDelta">↑ +3% from last month</div>
+      </div>
+      <div class="acard">
+        <div class="acard-num">8.4d</div>
+        <div class="acard-label">Avg. Resolution Time</div>
+        <div class="acard-delta delta-up">↓ 2.1 days faster</div>
+      </div>
+      <div class="acard">
+        <div class="acard-num" id="a4">0</div>
+        <div class="acard-label">Total Votes Cast</div>
+        <div class="acard-delta delta-up">Citizen engagement up</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="acard">
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:20px;color:var(--ink);">By Category</div>
+        <div id="analyticsBars"></div>
+      </div>
+      <div class="acard">
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:20px;color:var(--ink);">Top Cities</div>
+        <div id="cityRanks"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="page-map" class="page">
+  <div style="max-width:1100px;margin:0 auto;padding:36px 32px 80px;">
+    <h2 style="font-family:var(--font-display);font-size:32px;font-weight:700;letter-spacing:-1px;color:var(--ink);margin-bottom:24px;">Complaint Heat Map</h2>
+    <div class="map-container">
+      <div style="padding:20px 24px;border-bottom:1px solid var(--cream-3);font-size:14px;color:var(--ink-3);">Hover dots to see complaint counts. Larger = more complaints.</div>
+      <div style="height:500px;background:var(--cream);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <!-- Keep your existing SVG map -->
+        <svg viewBox="0 0 500 600" style="height:90%;opacity:0.95">
+          <!-- ... SVG content remains the same ... -->
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="page-profile" class="page">
+  <div style="max-width:900px;margin:0 auto;padding:36px 32px 80px;" id="profileWrap"></div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn" onclick="openComplaintModal()" title="Report Issue" style="display:none;">＋</button>
+
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- MODALS -->
+<!-- LOGIN MODAL -->
+<div class="overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Welcome back</div>
+        <div style="font-size:13px;color:var(--ink-4);margin-top:4px;">Join India's civic voice platform</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="auth-switch">
+        <button class="auth-switch-btn active" id="loginTabBtn" onclick="switchAuth('login')">Sign in</button>
+        <button class="auth-switch-btn" id="registerTabBtn" onclick="switchAuth('register')">Create account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input class="form-input" type="email" placeholder="you@email.com" id="lEmail"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="••••••••" id="lPass"/>
+        </div>
+        <button class="btn-fill" style="width:100%;padding:12px;font-size:15px;border-radius:12px;" onclick="doLogin()">Sign in →</button>
+        <div class="divider-or">or</div>
+        <div class="oauth-row">
+          <button class="oauth-btn" onclick="doOAuth('Google')">🔵 &nbsp;Google</button>
+          <button class="oauth-btn" onclick="doOAuth('Aadhaar')">🇮🇳 &nbsp;Aadhaar</button>
+        </div>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerForm" style="display:none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name</label>
+            <input class="form-input" type="text" placeholder="Rahul" id="rFirst"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name</label>
+            <input class="form-input" type="text" placeholder="Sharma" id="rLast"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="rahul@email.com" id="rEmail"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input class="form-input" type="text" placeholder="Anand" id="rCity"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input class="form-input" type="text" placeholder="Gujarat" id="rState"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="Create a strong password" id="rPass"/>
+        </div>
+        <button class="btn-fill" style="width:100%;padding:12px;font-size:15px;border-radius:12px;" onclick="doRegister()">Create account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLAINT MODAL -->
+<div class="overlay" id="complaintModal">
+  <div class="modal wide">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Report a civic issue</div>
+        <div style="font-size:13px;color:var(--ink-4);margin-top:4px;">File publicly — community votes push it to authorities</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('complaintModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Issue title *</label>
+        <input class="form-input" type="text" placeholder="Brief, clear description of the problem" id="cTitle"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Category *</label>
+          <select class="form-input" id="cCat">
+            <option value="">Choose category</option>
+            <option value="transport">🚆 Transport / Railways</option>
+            <option value="roads">🛣️ Roads & Highways</option>
+            <option value="water">💧 Water Supply</option>
+            <option value="electricity">⚡ Electricity / Power</option>
+            <option value="health">🏥 Healthcare</option>
+            <option value="corruption">🔍 Corruption / Fraud</option>
+            <option value="environment">🌿 Environment</option>
+            <option value="education">🎓 Education</option>
+            <option value="other">📋 Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Urgency</label>
+          <select class="form-input" id="cUrgency">
+            <option value="low">🟢 Low</option>
+            <option value="medium" selected>🟡 Medium</option>
+            <option value="high">🟠 High</option>
+            <option value="critical">🔴 Critical</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">District / City</label>
+          <input class="form-input" type="text" placeholder="e.g. Anand" id="cCity"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State</label>
+          <select class="form-input" id="cState">
+            <option>Gujarat</option><option>Maharashtra</option><option>Delhi</option>
+            <option>Rajasthan</option><option>Karnataka</option><option>Uttar Pradesh</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description *</label>
+        <textarea class="form-input" placeholder="Describe the issue in detail..." id="cDesc" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tags</label>
+        <input class="form-input" type="text" placeholder="e.g. trains, delay, railway (comma-separated)" id="cTags"/>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:4px;">
+        <button class="btn-coral" onclick="submitComplaint()" style="flex:1;padding:13px;font-size:15px;">Submit complaint</button>
+        <button class="btn-ghost" onclick="closeModal('complaintModal')" style="padding:13px 20px;">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detailModal">
+  <div class="modal wide">
+    <div class="modal-header">
+      <div class="modal-title" id="detailTitle">Complaint Details</div>
+      <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    </div>
+    <div class="modal-body" id="detailBody"></div>
+  </div>
+</div>
+
+<script>
+// ==================== BACKEND API INTEGRATION ====================
+const API_BASE = 'http://localhost:5000/api';
+let authToken = localStorage.getItem('authToken');
+let currentUser = null;
+let activeSort = 'latest';
+let activeCat = 'all';
+let activeState = '';
+let currentSkip = 0;
+let isLoading = false;
+let hasMore = true;
+
+// Helper function for API calls
+async function apiCall(endpoint, options = {}) {
+    const headers = {
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
+    
+    if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+    }
+    
+    const response = await fetch(`${API_BASE}${endpoint}`, {
+        ...options,
+        headers
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+        throw new Error(data.error || 'API call failed');
+    }
+    
+    return data;
+}
+
+// Load complaints from backend
+async function loadComplaints(reset = true) {
+    if (isLoading) return;
+    
+    if (reset) {
+        currentSkip = 0;
+        hasMore = true;
+        document.getElementById('feedContainer').innerHTML = '<div style="text-align:center;padding:40px;">Loading complaints...</div>';
+    }
+    
+    isLoading = true;
+    
+    try {
+        let url = `/complaints?limit=10&skip=${currentSkip}`;
+        
+        if (activeCat && activeCat !== 'all') {
+            url += `&category=${activeCat}`;
+        }
+        if (activeSort && activeSort !== 'latest') {
+            url += `&sort=${activeSort}`;
+        }
+        if (activeState) {
+            url += `&state=${activeState}`;
+        }
+        
+        const complaints = await apiCall(url);
+        
+        if (complaints.length < 10) {
+            hasMore = false;
+        }
+        
+        if (reset) {
+            renderFeed(complaints);
+        } else {
+            appendToFeed(complaints);
+        }
+        
+        currentSkip += complaints.length;
+    } catch (error) {
+        console.error('Error loading complaints:', error);
+        if (reset) {
+            document.getElementById('feedContainer').innerHTML = '<div class="empty"><div class="empty-emoji">⚠️</div><div class="empty-title">Failed to load complaints</div><div class="empty-sub">Please check your connection</div></div>';
+        }
+        showToast(error.message, 'error');
+    } finally {
+        isLoading = false;
+    }
+}
+
+// Load more complaints
+async function loadMoreComplaints() {
+    if (!hasMore) {
+        showToast('No more complaints to load', 'info');
+        return;
+    }
+    await loadComplaints(false);
+}
+
+// Render feed with complaints
+function renderFeed(complaints) {
+    const el = document.getElementById('feedContainer');
+    if (!complaints.length) {
+        el.innerHTML = `<div class="empty"><div class="empty-emoji">📭</div><div class="empty-title">Nothing here</div><div class="empty-sub">Try a different category or filter</div></div>`;
+        return;
+    }
+    el.innerHTML = complaints.map(renderCard).join('');
+}
+
+// Append to feed (for load more)
+function appendToFeed(complaints) {
+    const el = document.getElementById('feedContainer');
+    complaints.forEach(complaint => {
+        el.insertAdjacentHTML('beforeend', renderCard(complaint));
+    });
+}
+
+// Render individual card
+function renderCard(c) {
+    const pct = c.upvotes + c.downvotes > 0 ? Math.round(c.upvotes / (c.upvotes + c.downvotes) * 100) : 0;
+    const statusBadge = {
+        open: '<span class="badge badge-open">Open</span>',
+        review: '<span class="badge badge-review">Under Review</span>',
+        resolved: '<span class="badge badge-done">Resolved ✓</span>'
+    }[c.status] || '';
+    
+    const user = c.user || { name: 'Anonymous', initials: 'AN', verified: false };
+    
+    const CAT = {
+        transport: '🚆 Transport', roads: '🛣️ Roads', water: '💧 Water',
+        electricity: '⚡ Electricity', health: '🏥 Health', corruption: '🔍 Corruption',
+        environment: '🌿 Environment', education: '🎓 Education', other: '📋 Other'
+    };
+    
+    return `
+<div class="card" onclick="openDetail('${c._id}')">
+  <div class="card-inner">
+    <div class="urgency-stripe ${c.urgency}"></div>
+    <div class="card-body-wrap">
+      <div class="card-meta">
+        <div class="card-avi">${user.initials || 'AN'}</div>
+        <div class="card-user-info">
+          <div class="card-username">${user.name}${user.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
+          <div class="card-time">${new Date(c.created_at).toLocaleDateString()} · ${c.city}, ${c.state}</div>
+        </div>
+        <div class="card-badges">
+          ${c.viral ? '<span class="badge badge-viral">🔥 Viral</span>' : ''}
+          <span class="badge badge-cat">${CAT[c.category] || c.category}</span>
+          ${statusBadge}
+        </div>
+      </div>
+      <div class="card-title">${c.title}</div>
+      <div class="card-excerpt">${c.description.slice(0, 180)}${c.description.length > 180 ? '…' : ''}</div>
+      <div class="card-tags">${c.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+      ${c.auth_response ? `<div class="authority-response"><div class="ar-label">🏛 Official Response</div><div class="ar-text">${c.auth_response.slice(0, 100)}…</div></div>` : ''}
+    </div>
+  </div>
+  <div class="card-footer" onclick="event.stopPropagation()">
+    <div class="vote-group">
+      <button class="vote-btn up" onclick="vote(event, '${c._id}', 'up')">▲ <span id="u${c._id}">${c.upvotes.toLocaleString()}</span></button>
+      <div class="vote-sep"></div>
+      <button class="vote-btn down" onclick="vote(event, '${c._id}', 'down')">▼ <span id="d${c._id}">${c.downvotes}</span></button>
+    </div>
+    <button class="foot-btn" onclick="openDetail('${c._id}')">💬 ${c.comments?.length || 0}</button>
+    <button class="foot-btn" onclick="shareC(event, '${c._id}')">↗ Share</button>
+    <span class="vote-pct">${pct}% valid</span>
+  </div>
+</div>`;
+}
+
+// Vote on complaint
+async function vote(e, id, type) {
+    e.stopPropagation();
+    
+    if (!authToken) {
+        openModal('loginModal');
+        showToast('Please sign in to vote', 'info');
+        return;
+    }
+    
+    try {
+        await apiCall(`/complaints/${id}/vote`, {
+            method: 'POST',
+            body: JSON.stringify({ vote_type: type })
+        });
+        
+        // Reload to get updated vote counts
+        await loadComplaints(true);
+        showToast(`Voted ${type}!`, 'success');
+    } catch (error) {
+        console.error('Error voting:', error);
+        showToast(error.message, 'error');
+    }
+}
+
+// Submit complaint
+async function submitComplaint() {
+    if (!authToken) {
+        openModal('loginModal');
+        showToast('Please sign in to report an issue', 'info');
+        return;
+    }
+    
+    const title = document.getElementById('cTitle').value.trim();
+    const cat = document.getElementById('cCat').value;
+    const desc = document.getElementById('cDesc').value.trim();
+    const city = document.getElementById('cCity').value.trim();
+    const state = document.getElementById('cState').value;
+    const urgency = document.getElementById('cUrgency').value;
+    const tags = document.getElementById('cTags').value.split(',').map(t => t.trim()).filter(Boolean);
+    
+    if (!title || !cat || !desc || !city || !state) {
+        showToast('Please fill all required fields', 'error');
+        return;
+    }
+    
+    try {
+        const complaint = {
+            title,
+            category: cat,
+            description: desc,
+            city,
+            state,
+            urgency,
+            tags
+        };
+        
+        await apiCall('/complaints', {
+            method: 'POST',
+            body: JSON.stringify(complaint)
+        });
+        
+        closeModal('complaintModal');
+        showToast('Complaint filed successfully!', 'success');
+        
+        // Clear form
+        document.getElementById('cTitle').value = '';
+        document.getElementById('cDesc').value = '';
+        document.getElementById('cCity').value = '';
+        document.getElementById('cTags').value = '';
+        
+        // Reload complaints
+        await loadComplaints(true);
+    } catch (error) {
+        console.error('Error submitting complaint:', error);
+        showToast(error.message, 'error');
+    }
+}
+
+// Login function
+async function doLogin() {
+    const email = document.getElementById('lEmail').value;
+    const password = document.getElementById('lPass').value;
+    
+    if (!email || !password) {
+        showToast('Please enter email and password', 'error');
+        return;
+    }
+    
+    try {
+        const response = await apiCall('/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password })
+        });
+        
+        authToken = response.token;
+        localStorage.setItem('authToken', authToken);
+        currentUser = response.user;
+        
+        // Update UI
+        document.getElementById('authBtns').style.display = 'none';
+        document.getElementById('userBtns').style.display = 'flex';
+        document.getElementById('navAvatar').textContent = currentUser.initials;
+        
+        closeModal('loginModal');
+        showToast(`Welcome back, ${currentUser.name}!`, 'success');
+        
+        // Reload data for authenticated user
+        await loadComplaints(true);
+        await loadLeaderboard();
+    } catch (error) {
+        console.error('Login error:', error);
+        showToast(error.message, 'error');
+    }
+}
+
+// Register function
+async function doRegister() {
+    const firstName = document.getElementById('rFirst').value;
+    const lastName = document.getElementById('rLast').value;
+    const email = document.getElementById('rEmail').value;
+    const city = document.getElementById('rCity').value;
+    const state = document.getElementById('rState').value;
+    const password = document.getElementById('rPass').value;
+    
+    if (!firstName || !lastName || !email || !city || !state || !password) {
+        showToast('Please fill all required fields', 'error');
+        return;
+    }
+    
+    try {
+        const response = await apiCall('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email,
+                city,
+                state,
+                password
+            })
+        });
+        
+        authToken = response.token;
+        localStorage.setItem('authToken', authToken);
+        currentUser = response.user;
+        
+        // Update UI
+        document.getElementById('authBtns').style.display = 'none';
+        document.getElementById('userBtns').style.display = 'flex';
+        document.getElementById('navAvatar').textContent = currentUser.initials;
+        
+        closeModal('loginModal');
+        showToast(`Welcome, ${firstName}! Account created successfully`, 'success');
+        
+        await loadComplaints(true);
+    } catch (error) {
+        console.error('Registration error:', error);
+        showToast(error.message, 'error');
+    }
+}
+
+// OAuth placeholder
+function doOAuth(provider) {
+    showToast(`${provider} login coming soon!`, 'info');
+}
+
+// Load leaderboard
+async function loadLeaderboard() {
+    try {
+        const users = await apiCall('/analytics/leaderboard');
+        const leaderboardHtml = users.map((u, i) => {
+            const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : 'rn';
+            return `
+<div class="lb-item">
+  <span class="lb-rank ${rankClass}">${i + 1}</span>
+  <div class="lb-info">
+    <div class="lb-name">${u.name}${u.verified ? ' <span class="verified-tick" style="display:inline-flex;">✓</span>' : ''}</div>
+    <div class="lb-sub">${u.complaints} complaints · ${u.city || 'India'}</div>
+  </div>
+  <span class="lb-score">${u.impact_score}</span>
+</div>`;
+        }).join('');
+        document.getElementById('leaderboard').innerHTML = leaderboardHtml || '<div class="empty-sub">No data yet</div>';
+    } catch (error) {
+        console.error('Error loading leaderboard:', error);
+    }
+}
+
+// Load trending tags
+async function loadTrendingTags() {
+    try {
+        const tags = await apiCall('/analytics/trending-tags');
+        const trendingHtml = tags.slice(0, 5).map(t => `
+<div class="trending-item" onclick="liveSearch('${t._id}')">
+  <span class="trend-tag">#${t._id}</span>
+  <span class="trend-count">${t.count} posts</span>
+</div>`).join('');
+        document.getElementById('trendingTags').innerHTML = trendingHtml || '<div class="empty-sub">No trending tags</div>';
+    } catch (error) {
+        console.error('Error loading trending tags:', error);
+    }
+}
+
+// Load response rates
+async function loadResponseRates() {
+    try {
+        const rates = await apiCall('/analytics/response-rates');
+        const ratesHtml = rates.map(r => `
+<div class="response-bar">
+  <div class="rb-header"><span>${r.category}</span><span class="rb-pct">${r.percentage}%</span></div>
+  <div class="rb-track"><div class="rb-fill" style="width:${r.percentage}%;"></div></div>
+</div>`).join('');
+        document.getElementById('responseBars').innerHTML = ratesHtml || '<div class="empty-sub">No data yet</div>';
+    } catch (error) {
+        console.error('Error loading response rates:', error);
+    }
+}
+
+// Load analytics
+async function loadAnalytics() {
+    try {
+        const stats = await apiCall('/analytics/stats');
+        document.getElementById('a1').textContent = stats.total?.toLocaleString() || '0';
+        document.getElementById('a2').textContent = `${Math.round(stats.resolution_rate || 0)}%`;
+        
+        // Render category bars
+        const categoryHtml = (stats.categories || []).map(c => `
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:5px;">
+    <span>${c._id}</span>
+    <span>${c.count}</span>
+  </div>
+  <div class="rb-track"><div class="rb-fill" style="width:${Math.min(100, (c.count / (stats.total || 1)) * 100)}%;"></div></div>
+</div>`).join('');
+        document.getElementById('analyticsBars').innerHTML = categoryHtml || '<div class="empty-sub">No data yet</div>';
+        
+        // Render top cities
+        const cityHtml = (stats.top_cities || []).slice(0, 5).map((c, i) => `
+<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-3);">
+  <span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--ink-5);width:24px;text-align:center;">${i + 1}</span>
+  <span style="font-size:14px;font-weight:500;color:var(--ink);flex:1;">${c._id}</span>
+  <span style="font-family:var(--font-mono);font-size:12px;color:var(--coral);">${c.count}</span>
+</div>`).join('');
+        document.getElementById('cityRanks').innerHTML = cityHtml || '<div class="empty-sub">No data yet</div>';
+    } catch (error) {
+        console.error('Error loading analytics:', error);
+    }
+}
+
+// Open complaint details
+async function openDetail(complaintId) {
+    try {
+        const complaint = await apiCall(`/complaints/${complaintId}`);
+        document.getElementById('detailTitle').textContent = `${complaint.category} — Complaint`;
+        
+        const CAT = {
+            transport: '🚆 Transport', roads: '🛣️ Roads', water: '💧 Water',
+            electricity: '⚡ Electricity', health: '🏥 Health', corruption: '🔍 Corruption',
+            environment: '🌿 Environment', education: '🎓 Education', other: '📋 Other'
+        };
+        
+        const statusBadge = {
+            open: '<span class="badge badge-open">Open</span>',
+            review: '<span class="badge badge-review">Under Review</span>',
+            resolved: '<span class="badge badge-done">Resolved ✓</span>'
+        }[complaint.status] || '';
+        
+        const pct = complaint.upvotes + complaint.downvotes > 0 ? Math.round(complaint.upvotes / (complaint.upvotes + complaint.downvotes) * 100) : 0;
+        
+        document.getElementById('detailBody').innerHTML = `
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+  <div class="card-avi" style="width:44px;height:44px;font-size:16px;">${complaint.user?.initials || 'AN'}</div>
+  <div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);">${complaint.user?.name || 'Anonymous'}${complaint.user?.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
+    <div style="font-size:12px;color:var(--ink-4);">${new Date(complaint.created_at).toLocaleDateString()} · ${complaint.city}, ${complaint.state}</div>
+  </div>
+  <div class="card-badges" style="margin-left:auto;">
+    <span class="badge badge-cat">${CAT[complaint.category] || complaint.category}</span>
+    ${statusBadge}
+  </div>
+</div>
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;">${complaint.title}</h2>
+<p style="font-size:15px;color:var(--ink-3);line-height:1.8;margin-bottom:18px;">${complaint.description}</p>
+<div class="card-tags" style="margin-bottom:18px;">${complaint.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+${complaint.auth_response ? `<div class="authority-response" style="margin-bottom:18px;"><div class="ar-label">🏛 Official Authority Response</div><div class="ar-text">${complaint.auth_response}</div></div>` : ''}
+<div style="background:var(--cream);border:1.5px solid var(--cream-3);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+  <button class="vote-btn up" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event, '${complaint._id}', 'up'); closeModal('detailModal');">▲ ${complaint.upvotes.toLocaleString()} Upvotes</button>
+  <div style="flex:1;height:6px;background:var(--cream-3);border-radius:99px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--green);border-radius:99px;"></div></div>
+  <button class="vote-btn down" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event, '${complaint._id}', 'down'); closeModal('detailModal');">▼ ${complaint.downvotes} Downvotes</button>
+</div>
+<div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:12px;">💬 Community Discussion (${complaint.comments?.length || 0})</div>
+<div class="comment-list">
+  ${(complaint.comments || []).map(c => `
+<div class="comment">
+  <div class="cmt-avi">${c.user?.initials || 'AN'}</div>
+  <div>
+    <div class="cmt-user">${c.user?.name || 'Anonymous'}</div>
+    <div class="cmt-body">${c.text}</div>
+    <div class="cmt-time">${new Date(c.created_at).toLocaleDateString()}</div>
+  </div>
+</div>`).join('')}
+</div>
+<div style="display:flex;gap:10px;margin-top:16px;">
+  <input class="form-input" placeholder="Add your comment..." id="commentInput" style="flex:1;" ${!authToken ? 'onclick="closeModal(\'detailModal\');openModal(\'loginModal\');"' : ''}/>
+  <button class="btn-fill" style="padding:10px 18px;border-radius:10px;" onclick="addComment('${complaint._id}')">Post</button>
+</div>`;
+        
+        openModal('detailModal');
+    } catch (error) {
+        console.error('Error loading complaint details:', error);
+        showToast('Failed to load complaint details', 'error');
+    }
+}
+
+// Add comment
+async function addComment(complaintId) {
+    if (!authToken) {
+        openModal('loginModal');
+        return;
+    }
+    
+    const commentText = document.getElementById('commentInput')?.value;
+    if (!commentText) {
+        showToast('Please enter a comment', 'error');
+        return;
+    }
+    
+    try {
+        await apiCall(`/complaints/${complaintId}/comments`, {
+            method: 'POST',
+            body: JSON.stringify({ text: commentText })
+        });
+        
+        closeModal('detailModal');
+        showToast('Comment added!', 'success');
+        await openDetail(complaintId);
+    } catch (error) {
+        console.error('Error adding comment:', error);
+        showToast(error.message, 'error');
+    }
+}
+
+// Search function
+async function liveSearch(query) {
+    if (!query.trim()) {
+        await loadComplaints(true);
+        return;
+    }
+    
+    try {
+        const complaints = await apiCall(`/complaints?search=${encodeURIComponent(query)}`);
+        renderFeed(complaints);
+    } catch (error) {
+        console.error('Search error:', error);
+        showToast('Search failed', 'error');
+    }
+}
+
+// Filter functions
+function setSort(el, sort) {
+    document.querySelectorAll('.sidebar-left .pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    activeSort = sort;
+    loadComplaints(true);
+}
+
+function setCat(el, cat) {
+    document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    activeCat = cat;
+    loadComplaints(true);
+}
+
+function filterByState(state) {
+    activeState = state;
+    loadComplaints(true);
+}
+
+// Share function
+function shareC(e, id) {
+    e.stopPropagation();
+    navigator.clipboard?.writeText(window.location.href + '?c=' + id).then(() => {
+        showToast('Link copied! 🔗', 'success');
+    }).catch(() => {
+        showToast('complaints.in/?c=' + id, 'info');
+    });
+}
+
+// Profile page
+async function showPage(page) {
+    if (page === 'profile' && !authToken) {
+        openModal('loginModal');
+        return;
+    }
+    
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page-${page}`).classList.add('active');
+    
+    if (page === 'profile') {
+        await loadProfile();
+    } else if (page === 'analytics') {
+        await loadAnalytics();
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function loadProfile() {
+    if (!authToken) return;
+    
+    try {
+        const profile = await apiCall('/profile');
+        const myComplaints = profile.complaints || [];
+        
+        const profileHtml = `
+<div class="profile-banner">
+  <div class="profile-avi">${profile.user.initials}</div>
+  <div>
+    <div class="profile-name">${profile.user.name} <span class="verified-tick" style="width:18px;height:18px;font-size:10px;">✓</span></div>
+    <div class="profile-location">📍 ${profile.user.city}, ${profile.user.state} · Joined ${new Date(profile.user.joined).toLocaleDateString()}</div>
+    <div class="profile-stats">
+      <div><span class="pstat-num">${profile.stats.complaints_filed}</span><span class="pstat-label">Filed</span></div>
+      <div><span class="pstat-num">${profile.stats.resolved}</span><span class="pstat-label">Resolved</span></div>
+      <div><span class="pstat-num">${profile.stats.upvotes_received.toLocaleString()}</span><span class="pstat-label">Upvotes received</span></div>
+      <div><span class="pstat-num">${profile.stats.impact_score}</span><span class="pstat-label">Impact score</span></div>
+    </div>
+  </div>
+</div>
+<div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;">My Complaints</div>
+${myComplaints.length ? myComplaints.map(renderCard).join('') : `<div class="empty"><div class="empty-emoji">📝</div><div class="empty-title">No complaints yet</div><div class="empty-sub">Be the voice of change in your community</div><button class="btn-coral" onclick="openComplaintModal()" style="margin-top:18px;padding:12px 24px;">Report first issue</button></div>`}`;
+        
+        document.getElementById('profileWrap').innerHTML = profileHtml;
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        showToast('Failed to load profile', 'error');
+    }
+}
+
+// Modal functions
+function openModal(id, tab) {
+    document.getElementById(id).classList.add('open');
+    if (tab && id === 'loginModal') switchAuth(tab);
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+}
+
+function openComplaintModal() {
+    if (!authToken) {
+        openModal('loginModal');
+        showToast('Sign in to report an issue', 'info');
+        return;
+    }
+    openModal('complaintModal');
+}
+
+function switchAuth(tab) {
+    document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+    document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
+    document.getElementById('registerTabBtn').classList.toggle('active', tab === 'register');
+}
+
+// Toast notifications
+function showToast(msg, type = 'info') {
+    const icons = { success: '✓', error: '✕', info: '→' };
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.innerHTML = `<span class="toast-icon">${icons[type]}</span>${msg}`;
+    document.getElementById('toastStack').appendChild(t);
+    setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(40px)';
+        setTimeout(() => t.remove(), 350);
+    }, 3200);
+}
+
+// Close modals when clicking overlay
+document.querySelectorAll('.overlay').forEach(o => {
+    o.addEventListener('click', e => {
+        if (e.target === o) o.classList.remove('open');
+    });
+});
+
+// Initialize app
+async function initApp() {
+    // Check for stored token
+    authToken = localStorage.getItem('authToken');
+    
+    if (authToken) {
+        try {
+            const user = await apiCall('/auth/me');
+            currentUser = user;
+            document.getElementById('authBtns').style.display = 'none';
+            document.getElementById('userBtns').style.display = 'flex';
+            document.getElementById('navAvatar').textContent = currentUser.initials;
+        } catch (error) {
+            console.error('Session expired:', error);
+            localStorage.removeItem('authToken');
+            authToken = null;
+        }
+    }
+    
+    // Load initial data
+    await loadComplaints(true);
+    await loadLeaderboard();
+    await loadTrendingTags();
+    await loadResponseRates();
+    await loadAnalytics();
+    
+    // Animate stats
+    animateStats();
+}
+
+// Simple stats animation (for static numbers)
+function animateStats() {
+    // These are just for demo - real stats come from backend
+    const targets = [
+        { id: 's1', to: 12847, fmt: v => v.toLocaleString() },
+        { id: 's2', to: 3241, fmt: v => v.toLocaleString() },
+        { id: 's3', to: 247, fmt: v => v.toString() },
+        { id: 's4', to: 89, fmt: v => v + 'K' }
+    ];
+    
+    targets.forEach(({ id, to, fmt }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        let v = 0;
+        const step = Math.ceil(to / 55);
+        const iv = setInterval(() => {
+            v = Math.min(v + step, to);
+            el.textContent = fmt(v);
+            if (v >= to) clearInterval(iv);
+        }, 22);
+    });
+}
+
+// Start the app
+window.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>
