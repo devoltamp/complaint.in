@@ -9,4 +9,4 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-secret-key-change-in-production')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=7)
     SECRET_KEY = os.getenv('SECRET_KEY', 'flask-secret-key')
-    CORS_ORIGINS = ['http://localhost:5000', 'http://127.0.0.1:5000']
+    CORS_ORIGINS = ['http://localhost:5000', 'http://127.0.0.1:5000', 'https://your-app-name.herokuapp.com']

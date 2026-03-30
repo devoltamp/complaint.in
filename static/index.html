@@ -6,9 +6,7 @@
 <title>complaints.in</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ... [Keep all your existing CSS styles exactly as they are] ... */
-  /* Copy all the CSS from your original file here */
-  :root {
+:root {
   --cream: #faf7f2;
   --cream-2: #f3ede3;
   --cream-3: #ede4d6;
@@ -36,11 +34,11 @@
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'DM Mono', monospace;
 }
- 
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 html { scroll-behavior: smooth; }
- 
+
 body {
   background: var(--cream);
   color: var(--ink);
@@ -50,7 +48,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
- 
+
 /* ── NOISE TEXTURE ── */
 body::after {
   content: '';
@@ -62,12 +60,12 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 128px 128px;
 }
- 
+
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--cream-2); }
 ::-webkit-scrollbar-thumb { background: var(--ink-5); border-radius: 99px; }
- 
+
 /* ══════════════════════════════════════
    NAV
 ══════════════════════════════════════ */
@@ -85,7 +83,7 @@ nav {
   justify-content: space-between;
   gap: 24px;
 }
- 
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -94,7 +92,7 @@ nav {
   text-decoration: none;
   flex-shrink: 0;
 }
- 
+
 .logo-mark {
   width: 34px; height: 34px;
   background: var(--ink);
@@ -107,9 +105,9 @@ nav {
   letter-spacing: -1px;
   transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
- 
+
 .nav-logo:hover .logo-mark { transform: rotate(-6deg) scale(1.08); }
- 
+
 .logo-text {
   font-family: var(--font-display);
   font-size: 18px;
@@ -117,15 +115,15 @@ nav {
   color: var(--ink);
   letter-spacing: -0.5px;
 }
- 
+
 .logo-text span { color: var(--coral); }
- 
+
 .nav-center {
   flex: 1;
   max-width: 380px;
   position: relative;
 }
- 
+
 .nav-search {
   width: 100%;
   background: var(--cream-2);
@@ -138,15 +136,15 @@ nav {
   outline: none;
   transition: all 0.25s;
 }
- 
+
 .nav-search:focus {
   background: #fff;
   border-color: var(--ink-5);
   box-shadow: 0 0 0 3px rgba(15,13,10,0.05);
 }
- 
+
 .nav-search::placeholder { color: var(--ink-4); }
- 
+
 .search-icon-nav {
   position: absolute;
   left: 14px; top: 50%;
@@ -155,9 +153,9 @@ nav {
   font-size: 15px;
   pointer-events: none;
 }
- 
+
 .nav-actions { display: flex; align-items: center; gap: 8px; }
- 
+
 .btn-ghost {
   background: none;
   border: 1.5px solid var(--cream-3);
@@ -171,9 +169,9 @@ nav {
   transition: all 0.2s;
   white-space: nowrap;
 }
- 
+
 .btn-ghost:hover { background: var(--cream-2); border-color: var(--ink-5); }
- 
+
 .btn-fill {
   background: var(--ink);
   color: var(--cream);
@@ -187,9 +185,9 @@ nav {
   transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
   white-space: nowrap;
 }
- 
+
 .btn-fill:hover { background: var(--ink-2); transform: scale(1.03); }
- 
+
 .btn-coral {
   background: var(--coral);
   color: #fff;
@@ -204,9 +202,9 @@ nav {
   display: flex; align-items: center; gap: 6px;
   white-space: nowrap;
 }
- 
+
 .btn-coral:hover { background: var(--coral-light); transform: scale(1.03); box-shadow: 0 4px 20px rgba(232,92,58,0.35); }
- 
+
 .avatar-btn {
   width: 36px; height: 36px;
   border-radius: 50%;
@@ -221,9 +219,9 @@ nav {
   transition: all 0.2s;
   position: relative;
 }
- 
+
 .avatar-btn:hover { border-color: var(--ink); }
- 
+
 .notif-pip {
   position: absolute;
   top: -2px; right: -2px;
@@ -233,12 +231,12 @@ nav {
   border: 2px solid var(--cream);
   animation: pip-pulse 2s infinite;
 }
- 
+
 @keyframes pip-pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.3); }
 }
- 
+
 /* ══════════════════════════════════════
    PAGE / ROUTING
 ══════════════════════════════════════ */
@@ -247,12 +245,12 @@ nav {
   display: block;
   animation: pg-in 0.45s cubic-bezier(0.25,0.46,0.45,0.94) both;
 }
- 
+
 @keyframes pg-in {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
- 
+
 /* ══════════════════════════════════════
    HERO
 ══════════════════════════════════════ */
@@ -265,7 +263,7 @@ nav {
   gap: 64px;
   align-items: center;
 }
- 
+
 .hero-kicker {
   display: inline-flex;
   align-items: center;
@@ -282,14 +280,14 @@ nav {
   text-transform: uppercase;
   margin-bottom: 24px;
 }
- 
+
 .live-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--coral);
   animation: pip-pulse 1.5s infinite;
 }
- 
+
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(40px, 5.5vw, 72px);
@@ -299,12 +297,12 @@ nav {
   color: var(--ink);
   margin-bottom: 22px;
 }
- 
+
 .hero h1 em {
   font-style: italic;
   color: var(--coral);
 }
- 
+
 .hero-sub {
   font-size: 17px;
   font-weight: 300;
@@ -313,12 +311,12 @@ nav {
   max-width: 480px;
   margin-bottom: 36px;
 }
- 
+
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
- 
+
 .hero-ctas .btn-coral { padding: 13px 28px; font-size: 15px; }
 .hero-ctas .btn-ghost { padding: 13px 28px; font-size: 15px; }
- 
+
 .hero-stats {
   display: flex;
   gap: 32px;
@@ -326,7 +324,7 @@ nav {
   padding-top: 32px;
   border-top: 1px solid var(--cream-3);
 }
- 
+
 .hstat-num {
   font-family: var(--font-display);
   font-size: 28px;
@@ -336,19 +334,19 @@ nav {
   line-height: 1;
   margin-bottom: 4px;
 }
- 
+
 .hstat-label {
   font-size: 12px;
   color: var(--ink-4);
   font-weight: 400;
 }
- 
+
 /* HERO RIGHT — Live card stack */
 .hero-visual {
   position: relative;
   height: 380px;
 }
- 
+
 .floating-card {
   position: absolute;
   background: #fff;
@@ -359,34 +357,34 @@ nav {
   transition: transform 0.4s ease;
   animation: float-card 6s ease-in-out infinite;
 }
- 
+
 .floating-card:nth-child(1) {
   left: 0; top: 20px;
   width: 310px;
   animation-delay: 0s;
   z-index: 3;
 }
- 
+
 .floating-card:nth-child(2) {
   right: 0; top: 80px;
   width: 260px;
   animation-delay: -2s;
   z-index: 2;
 }
- 
+
 .floating-card:nth-child(3) {
   left: 30px; bottom: 30px;
   width: 280px;
   animation-delay: -4s;
   z-index: 1;
 }
- 
+
 @keyframes float-card {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   33%       { transform: translateY(-8px) rotate(0.5deg); }
   66%       { transform: translateY(4px) rotate(-0.3deg); }
 }
- 
+
 .fc-tag {
   display: inline-flex;
   align-items: center;
@@ -398,11 +396,11 @@ nav {
   border-radius: 99px;
   margin-bottom: 10px;
 }
- 
+
 .fc-tag.transport { background: var(--sky-bg); color: var(--sky); }
 .fc-tag.water     { background: var(--green-bg); color: var(--green); }
 .fc-tag.roads     { background: #fff8ec; color: #c47a00; }
- 
+
 .fc-title {
   font-family: var(--font-display);
   font-size: 14px;
@@ -411,7 +409,7 @@ nav {
   line-height: 1.3;
   margin-bottom: 12px;
 }
- 
+
 .fc-votes {
   display: flex;
   align-items: center;
@@ -419,10 +417,10 @@ nav {
   font-size: 12px;
   font-weight: 500;
 }
- 
+
 .vote-up { color: var(--green); }
 .vote-dn { color: var(--ink-4); }
- 
+
 .fc-bar {
   flex: 1;
   height: 3px;
@@ -430,13 +428,13 @@ nav {
   border-radius: 99px;
   overflow: hidden;
 }
- 
+
 .fc-bar-fill {
   height: 100%;
   background: var(--green);
   border-radius: 99px;
 }
- 
+
 /* ══════════════════════════════════════
    MAIN FEED LAYOUT
 ══════════════════════════════════════ */
@@ -448,14 +446,14 @@ nav {
   grid-template-columns: 240px 1fr 260px;
   gap: 32px;
 }
- 
+
 /* ── SIDEBAR LEFT ── */
 .sidebar-left, .sidebar-right {
   position: sticky;
   top: 80px;
   align-self: start;
 }
- 
+
 .sideblock {
   background: #fff;
   border: 1px solid var(--cream-3);
@@ -464,7 +462,7 @@ nav {
   margin-bottom: 16px;
   box-shadow: var(--shadow-sm);
 }
- 
+
 .sideblock-title {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -475,9 +473,9 @@ nav {
   padding: 14px 16px 10px;
   border-bottom: 1px solid var(--cream-3);
 }
- 
+
 .filter-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px; }
- 
+
 .pill {
   font-size: 12px;
   font-weight: 500;
@@ -489,10 +487,10 @@ nav {
   cursor: pointer;
   transition: all 0.18s;
 }
- 
+
 .pill:hover { border-color: var(--ink-4); color: var(--ink); }
 .pill.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
- 
+
 .cat-item {
   display: flex;
   align-items: center;
@@ -505,14 +503,14 @@ nav {
   transition: all 0.18s;
   border-bottom: 1px solid var(--cream-3);
 }
- 
+
 .cat-item:last-child { border-bottom: none; }
 .cat-item:hover { background: var(--cream-2); color: var(--ink); }
 .cat-item.active { color: var(--coral); background: var(--coral-bg); }
- 
+
 .cat-icon { font-size: 16px; }
 .cat-count { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
- 
+
 /* ── FEED CENTER ── */
 .feed-top {
   display: flex;
@@ -522,9 +520,9 @@ nav {
   padding-bottom: 16px;
   border-bottom: 1.5px solid var(--cream-3);
 }
- 
+
 .tab-row { display: flex; gap: 4px; }
- 
+
 .tab-pill {
   font-size: 13px;
   font-weight: 500;
@@ -536,10 +534,10 @@ nav {
   cursor: pointer;
   transition: all 0.2s;
 }
- 
+
 .tab-pill:hover { color: var(--ink); background: var(--cream-2); }
 .tab-pill.active { background: var(--ink); color: var(--cream); }
- 
+
 .sort-select {
   margin-left: auto;
   font-family: var(--font-body);
@@ -554,7 +552,7 @@ nav {
   appearance: none;
   -webkit-appearance: none;
 }
- 
+
 /* ── COMPLAINT CARD ── */
 .card {
   background: #fff;
@@ -567,48 +565,48 @@ nav {
   transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1), border-color 0.2s;
   animation: card-in 0.5s cubic-bezier(0.25,0.46,0.45,0.94) both;
 }
- 
+
 .card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-3px);
   border-color: var(--ink-5);
 }
- 
+
 @keyframes card-in {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
- 
+
 .card:nth-child(1) { animation-delay: 0.05s; }
 .card:nth-child(2) { animation-delay: 0.10s; }
 .card:nth-child(3) { animation-delay: 0.15s; }
 .card:nth-child(4) { animation-delay: 0.20s; }
 .card:nth-child(5) { animation-delay: 0.25s; }
- 
+
 /* Urgency stripe on left */
 .card-inner {
   display: flex;
 }
- 
+
 .urgency-stripe {
   width: 4px;
   flex-shrink: 0;
 }
- 
+
 .urgency-stripe.critical { background: var(--red); }
 .urgency-stripe.high     { background: var(--saffron); }
 .urgency-stripe.medium   { background: var(--sky); }
 .urgency-stripe.low      { background: var(--green); }
- 
+
 .card-body-wrap { flex: 1; padding: 20px 22px; }
- 
+
 .card-meta {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
 }
- 
+
 .card-avi {
   width: 36px; height: 36px;
   border-radius: 50%;
@@ -620,9 +618,9 @@ nav {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
- 
+
 .card-user-info { flex: 1; }
- 
+
 .card-username {
   font-size: 13px;
   font-weight: 600;
@@ -631,7 +629,7 @@ nav {
   align-items: center;
   gap: 5px;
 }
- 
+
 .verified-tick {
   width: 14px; height: 14px;
   background: var(--sky);
@@ -643,15 +641,15 @@ nav {
   font-size: 8px;
   font-weight: 700;
 }
- 
+
 .card-time {
   font-size: 11px;
   color: var(--ink-4);
   margin-top: 1px;
 }
- 
+
 .card-badges { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
- 
+
 .badge {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -660,14 +658,14 @@ nav {
   border-radius: 5px;
   letter-spacing: 0.3px;
 }
- 
+
 .badge-cat   { background: var(--cream-2); color: var(--ink-3); }
 .badge-open  { background: var(--green-bg); color: var(--green); }
 .badge-review{ background: #fff8ec; color: #c47a00; }
 .badge-done  { background: var(--sky-bg); color: var(--sky); }
 .badge-viral { background: var(--coral-bg); color: var(--coral); }
 .badge-pin   { background: var(--cream-2); color: var(--ink-3); }
- 
+
 .card-title {
   font-family: var(--font-display);
   font-size: 18px;
@@ -677,7 +675,7 @@ nav {
   margin-bottom: 10px;
   letter-spacing: -0.3px;
 }
- 
+
 .card-excerpt {
   font-size: 14px;
   color: var(--ink-3);
@@ -685,7 +683,7 @@ nav {
   margin-bottom: 14px;
   font-weight: 300;
 }
- 
+
 .card-location {
   display: inline-flex;
   align-items: center;
@@ -695,9 +693,9 @@ nav {
   margin-bottom: 14px;
   font-weight: 400;
 }
- 
+
 .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
- 
+
 .tag {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -706,10 +704,10 @@ nav {
   padding: 3px 10px;
   border-radius: 5px;
 }
- 
+
 /* proof thumbs */
 .proof-row { display: flex; gap: 8px; margin-bottom: 14px; }
- 
+
 .proof-thumb {
   width: 72px; height: 52px;
   border-radius: 8px;
@@ -719,9 +717,9 @@ nav {
   font-size: 22px;
   transition: transform 0.2s;
 }
- 
+
 .proof-thumb:hover { transform: scale(1.05); }
- 
+
 /* authority response */
 .authority-response {
   background: var(--sky-bg);
@@ -731,7 +729,7 @@ nav {
   margin-bottom: 14px;
   font-size: 13px;
 }
- 
+
 .ar-label {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -741,9 +739,9 @@ nav {
   color: var(--sky);
   margin-bottom: 4px;
 }
- 
+
 .ar-text { color: var(--ink-3); }
- 
+
 /* card footer */
 .card-footer {
   display: flex;
@@ -753,7 +751,7 @@ nav {
   border-top: 1px solid var(--cream-3);
   background: var(--cream);
 }
- 
+
 .vote-group {
   display: flex;
   align-items: center;
@@ -761,7 +759,7 @@ nav {
   border-radius: 99px;
   overflow: hidden;
 }
- 
+
 .vote-btn {
   display: flex;
   align-items: center;
@@ -776,18 +774,18 @@ nav {
   transition: all 0.18s;
   color: var(--ink-3);
 }
- 
+
 .vote-btn:hover { background: var(--cream-2); }
- 
+
 .vote-btn.up:hover, .vote-btn.up.voted { color: var(--green); }
 .vote-btn.down:hover, .vote-btn.down.voted { color: var(--red); }
- 
+
 .vote-sep {
   width: 1px;
   height: 20px;
   background: var(--cream-3);
 }
- 
+
 .foot-btn {
   background: none;
   border: 1.5px solid var(--cream-3);
@@ -801,16 +799,16 @@ nav {
   transition: all 0.18s;
   display: flex; align-items: center; gap: 5px;
 }
- 
+
 .foot-btn:hover { border-color: var(--ink-4); color: var(--ink); background: var(--cream-2); }
- 
+
 .vote-pct {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--ink-4);
   margin-left: auto;
 }
- 
+
 /* ── SIDEBAR RIGHT ── */
 .lb-item {
   display: flex;
@@ -821,10 +819,10 @@ nav {
   transition: background 0.18s;
   cursor: pointer;
 }
- 
+
 .lb-item:last-child { border-bottom: none; }
 .lb-item:hover { background: var(--cream-2); }
- 
+
 .lb-rank {
   font-family: var(--font-display);
   font-size: 16px;
@@ -832,17 +830,17 @@ nav {
   width: 28px;
   text-align: center;
 }
- 
+
 .lb-rank.r1 { color: #d4a017; }
 .lb-rank.r2 { color: #8e9eab; }
 .lb-rank.r3 { color: #c07038; }
 .lb-rank.rn { color: var(--ink-5); font-size: 13px; }
- 
+
 .lb-info { flex: 1; }
 .lb-name { font-size: 13px; font-weight: 600; color: var(--ink); }
 .lb-sub  { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); }
 .lb-score { font-family: var(--font-mono); font-size: 12px; color: var(--coral); font-weight: 500; }
- 
+
 .trending-item {
   display: flex;
   align-items: center;
@@ -852,19 +850,19 @@ nav {
   cursor: pointer;
   transition: background 0.18s;
 }
- 
+
 .trending-item:last-child { border-bottom: none; }
 .trending-item:hover { background: var(--cream-2); }
 .trend-tag { font-size: 13px; font-weight: 500; color: var(--sky); }
 .trend-count { font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
- 
+
 .response-bar {
   padding: 12px 16px;
   border-bottom: 1px solid var(--cream-3);
 }
- 
+
 .response-bar:last-child { border-bottom: none; }
- 
+
 .rb-header {
   display: flex;
   justify-content: space-between;
@@ -873,23 +871,23 @@ nav {
   color: var(--ink-2);
   margin-bottom: 6px;
 }
- 
+
 .rb-pct { font-family: var(--font-mono); font-size: 11px; }
- 
+
 .rb-track {
   height: 5px;
   background: var(--cream-3);
   border-radius: 99px;
   overflow: hidden;
 }
- 
+
 .rb-fill {
   height: 100%;
   border-radius: 99px;
   background: var(--green);
   transition: width 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
 }
- 
+
 /* ══════════════════════════════════════
    MODALS
 ══════════════════════════════════════ */
@@ -904,9 +902,9 @@ nav {
   justify-content: center;
   padding: 24px;
 }
- 
+
 .overlay.open { display: flex; }
- 
+
 .modal {
   background: #fff;
   border-radius: 20px;
@@ -918,14 +916,14 @@ nav {
   animation: modal-in 0.4s cubic-bezier(0.34,1.2,0.64,1) both;
   border: 1px solid var(--cream-3);
 }
- 
+
 .modal.wide { max-width: 700px; }
- 
+
 @keyframes modal-in {
   from { opacity: 0; transform: scale(0.94) translateY(16px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
- 
+
 .modal-header {
   padding: 24px 28px 20px;
   border-bottom: 1px solid var(--cream-3);
@@ -934,7 +932,7 @@ nav {
   justify-content: space-between;
   gap: 12px;
 }
- 
+
 .modal-title {
   font-family: var(--font-display);
   font-size: 22px;
@@ -943,7 +941,7 @@ nav {
   letter-spacing: -0.5px;
   line-height: 1.2;
 }
- 
+
 .modal-close {
   background: var(--cream-2);
   border: none;
@@ -957,14 +955,14 @@ nav {
   flex-shrink: 0;
   margin-top: 2px;
 }
- 
+
 .modal-close:hover { background: var(--cream-3); color: var(--ink); }
- 
+
 .modal-body { padding: 24px 28px; }
- 
+
 /* form */
 .form-group { margin-bottom: 18px; }
- 
+
 .form-label {
   display: block;
   font-size: 12px;
@@ -973,7 +971,7 @@ nav {
   margin-bottom: 6px;
   letter-spacing: 0.2px;
 }
- 
+
 .form-input {
   width: 100%;
   background: var(--cream);
@@ -987,21 +985,21 @@ nav {
   transition: all 0.22s;
   line-height: 1.5;
 }
- 
+
 .form-input:focus {
   background: #fff;
   border-color: var(--ink);
   box-shadow: 0 0 0 3px rgba(15,13,10,0.06);
 }
- 
+
 .form-input::placeholder { color: var(--ink-5); }
- 
+
 textarea.form-input { resize: vertical; min-height: 110px; }
- 
+
 select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer; }
- 
+
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
- 
+
 .upload-zone {
   border: 2px dashed var(--cream-3);
   border-radius: 12px;
@@ -1010,18 +1008,18 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   cursor: pointer;
   transition: all 0.22s;
 }
- 
+
 .upload-zone:hover {
   border-color: var(--ink-4);
   background: var(--cream);
 }
- 
+
 .upload-emoji { font-size: 32px; margin-bottom: 10px; }
 .upload-label { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 4px; }
 .upload-hint  { font-size: 12px; color: var(--ink-4); }
- 
+
 .file-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
- 
+
 .file-chip {
   display: flex;
   align-items: center;
@@ -1034,12 +1032,12 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   color: var(--ink-3);
   animation: chip-in 0.3s cubic-bezier(0.34,1.4,0.64,1) both;
 }
- 
+
 @keyframes chip-in {
   from { opacity: 0; transform: scale(0.8); }
   to   { opacity: 1; transform: scale(1); }
 }
- 
+
 /* auth tabs */
 .auth-switch {
   display: flex;
@@ -1048,7 +1046,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   padding: 4px;
   margin-bottom: 24px;
 }
- 
+
 .auth-switch-btn {
   flex: 1;
   background: none;
@@ -1062,15 +1060,15 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   transition: all 0.22s;
   color: var(--ink-4);
 }
- 
+
 .auth-switch-btn.active {
   background: #fff;
   color: var(--ink);
   box-shadow: 0 2px 8px rgba(15,13,10,0.1);
 }
- 
+
 .oauth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
- 
+
 .oauth-btn {
   display: flex;
   align-items: center;
@@ -1087,9 +1085,9 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   cursor: pointer;
   transition: all 0.2s;
 }
- 
+
 .oauth-btn:hover { border-color: var(--ink-4); background: var(--cream); }
- 
+
 .divider-or {
   display: flex;
   align-items: center;
@@ -1098,14 +1096,14 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   color: var(--ink-5);
   margin: 18px 0;
 }
- 
+
 .divider-or::before, .divider-or::after {
   content: '';
   flex: 1;
   height: 1px;
   background: var(--cream-3);
 }
- 
+
 /* ── DETAIL MODAL ── */
 .detail-proof-grid {
   display: grid;
@@ -1113,7 +1111,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   gap: 10px;
   margin-bottom: 18px;
 }
- 
+
 .dproof-cell {
   aspect-ratio: 16/10;
   border-radius: 10px;
@@ -1124,20 +1122,20 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
- 
+
 .dproof-cell:hover { transform: scale(1.03); box-shadow: var(--shadow-md); }
- 
+
 .comment-list { margin-top: 20px; }
- 
+
 .comment {
   display: flex;
   gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid var(--cream-3);
 }
- 
+
 .comment:last-child { border-bottom: none; }
- 
+
 .cmt-avi {
   width: 30px; height: 30px;
   border-radius: 50%;
@@ -1149,11 +1147,11 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
- 
+
 .cmt-user { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .cmt-body { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
 .cmt-time { font-size: 11px; color: var(--ink-5); margin-top: 4px; }
- 
+
 /* ── TOAST ── */
 .toast-stack {
   position: fixed;
@@ -1165,7 +1163,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   gap: 10px;
   pointer-events: none;
 }
- 
+
 .toast {
   display: flex;
   align-items: center;
@@ -1182,17 +1180,17 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   animation: toast-in 0.4s cubic-bezier(0.34,1.3,0.64,1) both;
   transition: opacity 0.3s, transform 0.3s;
 }
- 
+
 @keyframes toast-in {
   from { opacity: 0; transform: translateX(60px) scale(0.9); }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
- 
+
 .toast-icon { font-size: 18px; flex-shrink: 0; }
 .toast.success .toast-icon::before { content: '✓'; }
 .toast.error   .toast-icon::before { content: '✕'; }
 .toast.info    .toast-icon::before { content: '→'; }
- 
+
 /* ── FAB ── */
 .fab {
   position: fixed;
@@ -1210,12 +1208,12 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   z-index: 50;
 }
- 
+
 .fab:hover {
   transform: scale(1.12) rotate(45deg);
   box-shadow: 0 8px 32px rgba(232,92,58,0.55);
 }
- 
+
 /* ── ANALYTICS PAGE ── */
 .analytics-grid {
   display: grid;
@@ -1223,7 +1221,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   gap: 16px;
   margin-bottom: 28px;
 }
- 
+
 .acard {
   background: #fff;
   border: 1px solid var(--cream-3);
@@ -1232,9 +1230,9 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
 }
- 
+
 .acard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
- 
+
 .acard-num {
   font-family: var(--font-display);
   font-size: 36px;
@@ -1243,12 +1241,12 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   line-height: 1;
   margin-bottom: 6px;
 }
- 
+
 .acard-label { font-size: 12px; color: var(--ink-4); font-weight: 400; }
 .acard-delta { font-family: var(--font-mono); font-size: 11px; margin-top: 8px; }
 .delta-up   { color: var(--green); }
 .delta-dn   { color: var(--red); }
- 
+
 /* ── MAP PAGE ── */
 .map-container {
   background: #fff;
@@ -1257,7 +1255,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
- 
+
 /* ── PROFILE ── */
 .profile-banner {
   background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
@@ -1271,7 +1269,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   position: relative;
   overflow: hidden;
 }
- 
+
 .profile-banner::before {
   content: '';
   position: absolute;
@@ -1280,7 +1278,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   border-radius: 50%;
   background: rgba(255,255,255,0.04);
 }
- 
+
 .profile-avi {
   width: 76px; height: 76px;
   border-radius: 50%;
@@ -1293,7 +1291,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   border: 3px solid rgba(255,255,255,0.2);
   flex-shrink: 0;
 }
- 
+
 .profile-name {
   font-family: var(--font-display);
   font-size: 26px;
@@ -1301,23 +1299,23 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   letter-spacing: -0.5px;
   margin-bottom: 4px;
 }
- 
+
 .profile-location { font-size: 13px; opacity: 0.6; margin-bottom: 16px; }
- 
+
 .profile-stats { display: flex; gap: 28px; }
 .pstat-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; display: block; }
 .pstat-label { font-size: 11px; opacity: 0.55; }
- 
+
 /* ── EMPTY STATE ── */
 .empty {
   text-align: center;
   padding: 64px 32px;
 }
- 
+
 .empty-emoji { font-size: 52px; margin-bottom: 16px; }
 .empty-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .empty-sub   { font-size: 14px; color: var(--ink-4); }
- 
+
 /* ── SECTION HEADER ── */
 .section-header {
   font-family: var(--font-display);
@@ -1331,7 +1329,7 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   align-items: center;
   justify-content: space-between;
 }
- 
+
 .ticker-bar {
   background: var(--ink);
   color: var(--cream);
@@ -1343,17 +1341,17 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   white-space: nowrap;
   position: relative;
 }
- 
+
 .ticker-inner {
   display: inline-block;
   animation: ticker 30s linear infinite;
 }
- 
+
 @keyframes ticker {
   from { transform: translateX(100vw); }
   to   { transform: translateX(-100%); }
 }
- 
+
 .hero-divider {
   max-width: 1200px;
   margin: 0 auto;
@@ -1362,14 +1360,14 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
   border-top: 1.5px solid var(--cream-3);
   margin-bottom: 24px;
 }
- 
+
 @media (max-width: 1100px) {
   .feed-wrapper { grid-template-columns: 1fr; }
   .sidebar-left, .sidebar-right { position: static; }
   .hero { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
 }
- 
+
 @media (max-width: 768px) {
   nav { padding: 0 16px; gap: 12px; }
   .nav-center { display: none; }
@@ -1499,13 +1497,13 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
       </div>
       <div class="sideblock">
         <div class="sideblock-title">Category</div>
-        <div class="cat-item active" onclick="setCat(this,'all')"><span class="cat-icon">📋</span> All Issues <span class="cat-count">6</span></div>
-        <div class="cat-item" onclick="setCat(this,'transport')"><span class="cat-icon">🚆</span> Transport <span class="cat-count">1</span></div>
-        <div class="cat-item" onclick="setCat(this,'roads')"><span class="cat-icon">🛣️</span> Roads <span class="cat-count">1</span></div>
-        <div class="cat-item" onclick="setCat(this,'water')"><span class="cat-icon">💧</span> Water <span class="cat-count">1</span></div>
-        <div class="cat-item" onclick="setCat(this,'electricity')"><span class="cat-icon">⚡</span> Electricity <span class="cat-count">1</span></div>
-        <div class="cat-item" onclick="setCat(this,'corruption')"><span class="cat-icon">🔍</span> Corruption <span class="cat-count">1</span></div>
-        <div class="cat-item" onclick="setCat(this,'education')"><span class="cat-icon">🎓</span> Education <span class="cat-count">1</span></div>
+        <div class="cat-item active" onclick="setCat(this,'all')"><span class="cat-icon">📋</span> All Issues <span class="cat-count" id="allCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'transport')"><span class="cat-icon">🚆</span> Transport <span class="cat-count" id="transportCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'roads')"><span class="cat-icon">🛣️</span> Roads <span class="cat-count" id="roadsCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'water')"><span class="cat-icon">💧</span> Water <span class="cat-count" id="waterCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'electricity')"><span class="cat-icon">⚡</span> Electricity <span class="cat-count" id="electricityCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'corruption')"><span class="cat-icon">🔍</span> Corruption <span class="cat-count" id="corruptionCount">0</span></div>
+        <div class="cat-item" onclick="setCat(this,'education')"><span class="cat-icon">🎓</span> Education <span class="cat-count" id="educationCount">0</span></div>
       </div>
       <div class="sideblock">
         <div class="sideblock-title">State</div>
@@ -1598,10 +1596,58 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
     <div class="map-container">
       <div style="padding:20px 24px;border-bottom:1px solid var(--cream-3);font-size:14px;color:var(--ink-3);">Hover dots to see complaint counts. Larger = more complaints.</div>
       <div style="height:500px;background:var(--cream);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-        <!-- Keep your existing SVG map -->
         <svg viewBox="0 0 500 600" style="height:90%;opacity:0.95">
-          <!-- ... SVG content remains the same ... -->
+          <defs>
+            <radialGradient id="h1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#e85c3a" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#e85c3a" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="h2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#3a7bd5" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#3a7bd5" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="h3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f5a623" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path d="M240,40 L310,70 L350,120 L370,180 L360,240 L345,300 L330,360 L310,400 L295,440 L270,470 L250,490 L230,470 L210,440 L190,400 L170,360 L155,300 L140,240 L130,180 L145,120 L175,72 Z"
+            fill="#f3ede3" stroke="#ccc4b8" stroke-width="1.5" stroke-linejoin="round"/>
+          <ellipse cx="295" cy="180" rx="70" ry="70" fill="url(#h1)"/>
+          <ellipse cx="230" cy="310" rx="90" ry="70" fill="url(#h2)"/>
+          <ellipse cx="175" cy="230" rx="60" ry="55" fill="url(#h3)"/>
+          <!-- Delhi -->
+          <circle cx="295" cy="180" r="14" fill="#e85c3a" opacity="0.9">
+            <animate attributeName="r" values="10;16;10" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0.6;0.9" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <text x="313" y="175" fill="#e85c3a" font-family="DM Mono" font-size="10" font-weight="500">Delhi NCR</text>
+          <text x="313" y="188" fill="#9a9088" font-family="DM Mono" font-size="9">3,421 complaints</text>
+          <!-- Mumbai -->
+          <circle cx="220" cy="305" r="12" fill="#3a7bd5" opacity="0.9">
+            <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="238" y="301" fill="#3a7bd5" font-family="DM Mono" font-size="10">Mumbai</text>
+          <text x="238" y="314" fill="#9a9088" font-family="DM Mono" font-size="9">2,847 complaints</text>
+          <!-- Ahmedabad -->
+          <circle cx="175" cy="240" r="10" fill="#f5a623" opacity="0.9">
+            <animate attributeName="r" values="6;12;6" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <text x="190" y="236" fill="#c47a00" font-family="DM Mono" font-size="10">Ahmedabad</text>
+          <text x="190" y="249" fill="#9a9088" font-family="DM Mono" font-size="9">1,234 complaints</text>
+          <!-- Bengaluru -->
+          <circle cx="250" cy="400" r="9" fill="#2a9d5c" opacity="0.9">
+            <animate attributeName="r" values="6;11;6" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="264" y="396" fill="#2a9d5c" font-family="DM Mono" font-size="10">Bengaluru</text>
+          <text x="264" y="409" fill="#9a9088" font-family="DM Mono" font-size="9">1,943 complaints</text>
         </svg>
+        <div style="position:absolute;top:16px;right:20px;background:#fff;border:1px solid var(--cream-3);border-radius:10px;padding:14px;font-size:12px;box-shadow:var(--shadow-sm);">
+          <div style="font-weight:600;color:var(--ink);margin-bottom:8px;">Legend</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#e85c3a;"></div><span style="color:var(--ink-3);">Critical zone</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#3a7bd5;"></div><span style="color:var(--ink-3);">High activity</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:10px;height:10px;border-radius:50%;background:#2a9d5c;"></div><span style="color:var(--ink-3);">Active</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1772,7 +1818,11 @@ select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer;
 
 <script>
 // ==================== BACKEND API INTEGRATION ====================
-const API_BASE = 'http://localhost:5000/api';
+// Auto-detect API URL based on environment
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000/api'
+    : `${window.location.protocol}//${window.location.hostname}/api`;
+
 let authToken = localStorage.getItem('authToken');
 let currentUser = null;
 let activeSort = 'latest';
@@ -1829,7 +1879,7 @@ async function loadComplaints(reset = true) {
             url += `&sort=${activeSort}`;
         }
         if (activeState) {
-            url += `&state=${activeState}`;
+            url += `&state=${encodeURIComponent(activeState)}`;
         }
         
         const complaints = await apiCall(url);
@@ -1848,7 +1898,13 @@ async function loadComplaints(reset = true) {
     } catch (error) {
         console.error('Error loading complaints:', error);
         if (reset) {
-            document.getElementById('feedContainer').innerHTML = '<div class="empty"><div class="empty-emoji">⚠️</div><div class="empty-title">Failed to load complaints</div><div class="empty-sub">Please check your connection</div></div>';
+            document.getElementById('feedContainer').innerHTML = `
+                <div class="empty">
+                    <div class="empty-emoji">⚠️</div>
+                    <div class="empty-title">Failed to load complaints</div>
+                    <div class="empty-sub">Please check your connection or try again later.</div>
+                    <button class="btn-coral" style="margin-top:20px;" onclick="loadComplaints(true)">Retry</button>
+                </div>`;
         }
         showToast(error.message, 'error');
     } finally {
@@ -1885,7 +1941,7 @@ function appendToFeed(complaints) {
 
 // Render individual card
 function renderCard(c) {
-    const pct = c.upvotes + c.downvotes > 0 ? Math.round(c.upvotes / (c.upvotes + c.downvotes) * 100) : 0;
+    const pct = (c.upvotes + c.downvotes > 0) ? Math.round(c.upvotes / (c.upvotes + c.downvotes) * 100) : 0;
     const statusBadge = {
         open: '<span class="badge badge-open">Open</span>',
         review: '<span class="badge badge-review">Under Review</span>',
@@ -1908,8 +1964,8 @@ function renderCard(c) {
       <div class="card-meta">
         <div class="card-avi">${user.initials || 'AN'}</div>
         <div class="card-user-info">
-          <div class="card-username">${user.name}${user.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
-          <div class="card-time">${new Date(c.created_at).toLocaleDateString()} · ${c.city}, ${c.state}</div>
+          <div class="card-username">${escapeHtml(user.name)}${user.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
+          <div class="card-time">${new Date(c.created_at).toLocaleDateString()} · ${escapeHtml(c.city)}, ${escapeHtml(c.state)}</div>
         </div>
         <div class="card-badges">
           ${c.viral ? '<span class="badge badge-viral">🔥 Viral</span>' : ''}
@@ -1917,10 +1973,10 @@ function renderCard(c) {
           ${statusBadge}
         </div>
       </div>
-      <div class="card-title">${c.title}</div>
-      <div class="card-excerpt">${c.description.slice(0, 180)}${c.description.length > 180 ? '…' : ''}</div>
-      <div class="card-tags">${c.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
-      ${c.auth_response ? `<div class="authority-response"><div class="ar-label">🏛 Official Response</div><div class="ar-text">${c.auth_response.slice(0, 100)}…</div></div>` : ''}
+      <div class="card-title">${escapeHtml(c.title)}</div>
+      <div class="card-excerpt">${escapeHtml(c.description.slice(0, 180))}${c.description.length > 180 ? '…' : ''}</div>
+      <div class="card-tags">${c.tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('')}</div>
+      ${c.auth_response ? `<div class="authority-response"><div class="ar-label">🏛 Official Response</div><div class="ar-text">${escapeHtml(c.auth_response.slice(0, 100))}…</div></div>` : ''}
     </div>
   </div>
   <div class="card-footer" onclick="event.stopPropagation()">
@@ -1934,6 +1990,17 @@ function renderCard(c) {
     <span class="vote-pct">${pct}% valid</span>
   </div>
 </div>`;
+}
+
+// Helper to escape HTML
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
 }
 
 // Vote on complaint
@@ -2009,6 +2076,8 @@ async function submitComplaint() {
         
         // Reload complaints
         await loadComplaints(true);
+        await loadAnalytics(); // refresh analytics
+        await updateCategoryCounts(); // refresh category counts
     } catch (error) {
         console.error('Error submitting complaint:', error);
         showToast(error.message, 'error');
@@ -2113,8 +2182,8 @@ async function loadLeaderboard() {
 <div class="lb-item">
   <span class="lb-rank ${rankClass}">${i + 1}</span>
   <div class="lb-info">
-    <div class="lb-name">${u.name}${u.verified ? ' <span class="verified-tick" style="display:inline-flex;">✓</span>' : ''}</div>
-    <div class="lb-sub">${u.complaints} complaints · ${u.city || 'India'}</div>
+    <div class="lb-name">${escapeHtml(u.name)}${u.verified ? ' <span class="verified-tick" style="display:inline-flex;">✓</span>' : ''}</div>
+    <div class="lb-sub">${u.complaints} complaints · ${escapeHtml(u.city || 'India')}</div>
   </div>
   <span class="lb-score">${u.impact_score}</span>
 </div>`;
@@ -2122,6 +2191,7 @@ async function loadLeaderboard() {
         document.getElementById('leaderboard').innerHTML = leaderboardHtml || '<div class="empty-sub">No data yet</div>';
     } catch (error) {
         console.error('Error loading leaderboard:', error);
+        document.getElementById('leaderboard').innerHTML = '<div class="empty-sub">Unavailable</div>';
     }
 }
 
@@ -2130,13 +2200,14 @@ async function loadTrendingTags() {
     try {
         const tags = await apiCall('/analytics/trending-tags');
         const trendingHtml = tags.slice(0, 5).map(t => `
-<div class="trending-item" onclick="liveSearch('${t._id}')">
-  <span class="trend-tag">#${t._id}</span>
+<div class="trending-item" onclick="liveSearch('${escapeHtml(t._id)}')">
+  <span class="trend-tag">#${escapeHtml(t._id)}</span>
   <span class="trend-count">${t.count} posts</span>
 </div>`).join('');
         document.getElementById('trendingTags').innerHTML = trendingHtml || '<div class="empty-sub">No trending tags</div>';
     } catch (error) {
         console.error('Error loading trending tags:', error);
+        document.getElementById('trendingTags').innerHTML = '<div class="empty-sub">Unavailable</div>';
     }
 }
 
@@ -2146,12 +2217,13 @@ async function loadResponseRates() {
         const rates = await apiCall('/analytics/response-rates');
         const ratesHtml = rates.map(r => `
 <div class="response-bar">
-  <div class="rb-header"><span>${r.category}</span><span class="rb-pct">${r.percentage}%</span></div>
+  <div class="rb-header"><span>${escapeHtml(r.category)}</span><span class="rb-pct">${r.percentage}%</span></div>
   <div class="rb-track"><div class="rb-fill" style="width:${r.percentage}%;"></div></div>
 </div>`).join('');
         document.getElementById('responseBars').innerHTML = ratesHtml || '<div class="empty-sub">No data yet</div>';
     } catch (error) {
         console.error('Error loading response rates:', error);
+        document.getElementById('responseBars').innerHTML = '<div class="empty-sub">Unavailable</div>';
     }
 }
 
@@ -2161,12 +2233,19 @@ async function loadAnalytics() {
         const stats = await apiCall('/analytics/stats');
         document.getElementById('a1').textContent = stats.total?.toLocaleString() || '0';
         document.getElementById('a2').textContent = `${Math.round(stats.resolution_rate || 0)}%`;
+        document.getElementById('a4').textContent = (stats.total_votes || 0).toLocaleString();
+        
+        // Update hero stats
+        document.getElementById('s1').textContent = stats.total?.toLocaleString() || '0';
+        document.getElementById('s2').textContent = stats.resolved?.toLocaleString() || '0';
+        document.getElementById('s3').textContent = stats.unique_cities || '0';
+        document.getElementById('s4').textContent = stats.unique_users ? Math.round(stats.unique_users / 1000) + 'K' : '0';
         
         // Render category bars
         const categoryHtml = (stats.categories || []).map(c => `
 <div style="margin-bottom:14px;">
   <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:5px;">
-    <span>${c._id}</span>
+    <span>${escapeHtml(c._id)}</span>
     <span>${c.count}</span>
   </div>
   <div class="rb-track"><div class="rb-fill" style="width:${Math.min(100, (c.count / (stats.total || 1)) * 100)}%;"></div></div>
@@ -2177,12 +2256,36 @@ async function loadAnalytics() {
         const cityHtml = (stats.top_cities || []).slice(0, 5).map((c, i) => `
 <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-3);">
   <span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--ink-5);width:24px;text-align:center;">${i + 1}</span>
-  <span style="font-size:14px;font-weight:500;color:var(--ink);flex:1;">${c._id}</span>
+  <span style="font-size:14px;font-weight:500;color:var(--ink);flex:1;">${escapeHtml(c._id)}</span>
   <span style="font-family:var(--font-mono);font-size:12px;color:var(--coral);">${c.count}</span>
 </div>`).join('');
         document.getElementById('cityRanks').innerHTML = cityHtml || '<div class="empty-sub">No data yet</div>';
+        
+        // Update category counts in left sidebar
+        await updateCategoryCounts();
     } catch (error) {
         console.error('Error loading analytics:', error);
+        // Don't show toast, just fallback to zeros
+    }
+}
+
+// Update category counts in left sidebar
+async function updateCategoryCounts() {
+    try {
+        const stats = await apiCall('/analytics/stats');
+        if (stats.categories) {
+            const counts = {};
+            stats.categories.forEach(c => { counts[c._id] = c.count; });
+            document.getElementById('allCount').textContent = stats.total || 0;
+            document.getElementById('transportCount').textContent = counts['transport'] || 0;
+            document.getElementById('roadsCount').textContent = counts['roads'] || 0;
+            document.getElementById('waterCount').textContent = counts['water'] || 0;
+            document.getElementById('electricityCount').textContent = counts['electricity'] || 0;
+            document.getElementById('corruptionCount').textContent = counts['corruption'] || 0;
+            document.getElementById('educationCount').textContent = counts['education'] || 0;
+        }
+    } catch (error) {
+        console.error('Error updating category counts:', error);
     }
 }
 
@@ -2204,24 +2307,24 @@ async function openDetail(complaintId) {
             resolved: '<span class="badge badge-done">Resolved ✓</span>'
         }[complaint.status] || '';
         
-        const pct = complaint.upvotes + complaint.downvotes > 0 ? Math.round(complaint.upvotes / (complaint.upvotes + complaint.downvotes) * 100) : 0;
+        const pct = (complaint.upvotes + complaint.downvotes > 0) ? Math.round(complaint.upvotes / (complaint.upvotes + complaint.downvotes) * 100) : 0;
         
         document.getElementById('detailBody').innerHTML = `
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
-  <div class="card-avi" style="width:44px;height:44px;font-size:16px;">${complaint.user?.initials || 'AN'}</div>
+  <div class="card-avi" style="width:44px;height:44px;font-size:16px;">${escapeHtml(complaint.user?.initials || 'AN')}</div>
   <div>
-    <div style="font-size:15px;font-weight:600;color:var(--ink);">${complaint.user?.name || 'Anonymous'}${complaint.user?.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
-    <div style="font-size:12px;color:var(--ink-4);">${new Date(complaint.created_at).toLocaleDateString()} · ${complaint.city}, ${complaint.state}</div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);">${escapeHtml(complaint.user?.name || 'Anonymous')}${complaint.user?.verified ? ` <span class="verified-tick">✓</span>` : ''}</div>
+    <div style="font-size:12px;color:var(--ink-4);">${new Date(complaint.created_at).toLocaleDateString()} · ${escapeHtml(complaint.city)}, ${escapeHtml(complaint.state)}</div>
   </div>
   <div class="card-badges" style="margin-left:auto;">
     <span class="badge badge-cat">${CAT[complaint.category] || complaint.category}</span>
     ${statusBadge}
   </div>
 </div>
-<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;">${complaint.title}</h2>
-<p style="font-size:15px;color:var(--ink-3);line-height:1.8;margin-bottom:18px;">${complaint.description}</p>
-<div class="card-tags" style="margin-bottom:18px;">${complaint.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
-${complaint.auth_response ? `<div class="authority-response" style="margin-bottom:18px;"><div class="ar-label">🏛 Official Authority Response</div><div class="ar-text">${complaint.auth_response}</div></div>` : ''}
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;">${escapeHtml(complaint.title)}</h2>
+<p style="font-size:15px;color:var(--ink-3);line-height:1.8;margin-bottom:18px;">${escapeHtml(complaint.description)}</p>
+<div class="card-tags" style="margin-bottom:18px;">${complaint.tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('')}</div>
+${complaint.auth_response ? `<div class="authority-response" style="margin-bottom:18px;"><div class="ar-label">🏛 Official Authority Response</div><div class="ar-text">${escapeHtml(complaint.auth_response)}</div></div>` : ''}
 <div style="background:var(--cream);border:1.5px solid var(--cream-3);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;">
   <button class="vote-btn up" style="border:1.5px solid var(--cream-3);border-radius:99px;padding:8px 18px;" onclick="vote(event, '${complaint._id}', 'up'); closeModal('detailModal');">▲ ${complaint.upvotes.toLocaleString()} Upvotes</button>
   <div style="flex:1;height:6px;background:var(--cream-3);border-radius:99px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--green);border-radius:99px;"></div></div>
@@ -2231,10 +2334,10 @@ ${complaint.auth_response ? `<div class="authority-response" style="margin-botto
 <div class="comment-list">
   ${(complaint.comments || []).map(c => `
 <div class="comment">
-  <div class="cmt-avi">${c.user?.initials || 'AN'}</div>
+  <div class="cmt-avi">${escapeHtml(c.user?.initials || 'AN')}</div>
   <div>
-    <div class="cmt-user">${c.user?.name || 'Anonymous'}</div>
-    <div class="cmt-body">${c.text}</div>
+    <div class="cmt-user">${escapeHtml(c.user?.name || 'Anonymous')}</div>
+    <div class="cmt-body">${escapeHtml(c.text)}</div>
     <div class="cmt-time">${new Date(c.created_at).toLocaleDateString()}</div>
   </div>
 </div>`).join('')}
@@ -2318,10 +2421,11 @@ function filterByState(state) {
 // Share function
 function shareC(e, id) {
     e.stopPropagation();
-    navigator.clipboard?.writeText(window.location.href + '?c=' + id).then(() => {
+    const url = `${window.location.origin}?c=${id}`;
+    navigator.clipboard?.writeText(url).then(() => {
         showToast('Link copied! 🔗', 'success');
     }).catch(() => {
-        showToast('complaints.in/?c=' + id, 'info');
+        showToast(url, 'info');
     });
 }
 
@@ -2353,10 +2457,10 @@ async function loadProfile() {
         
         const profileHtml = `
 <div class="profile-banner">
-  <div class="profile-avi">${profile.user.initials}</div>
+  <div class="profile-avi">${escapeHtml(profile.user.initials)}</div>
   <div>
-    <div class="profile-name">${profile.user.name} <span class="verified-tick" style="width:18px;height:18px;font-size:10px;">✓</span></div>
-    <div class="profile-location">📍 ${profile.user.city}, ${profile.user.state} · Joined ${new Date(profile.user.joined).toLocaleDateString()}</div>
+    <div class="profile-name">${escapeHtml(profile.user.name)} <span class="verified-tick" style="width:18px;height:18px;font-size:10px;">✓</span></div>
+    <div class="profile-location">📍 ${escapeHtml(profile.user.city)}, ${escapeHtml(profile.user.state)} · Joined ${new Date(profile.user.joined).toLocaleDateString()}</div>
     <div class="profile-stats">
       <div><span class="pstat-num">${profile.stats.complaints_filed}</span><span class="pstat-label">Filed</span></div>
       <div><span class="pstat-num">${profile.stats.resolved}</span><span class="pstat-label">Resolved</span></div>
@@ -2406,7 +2510,7 @@ function showToast(msg, type = 'info') {
     const icons = { success: '✓', error: '✕', info: '→' };
     const t = document.createElement('div');
     t.className = `toast ${type}`;
-    t.innerHTML = `<span class="toast-icon">${icons[type]}</span>${msg}`;
+    t.innerHTML = `<span class="toast-icon">${icons[type]}</span>${escapeHtml(msg)}`;
     document.getElementById('toastStack').appendChild(t);
     setTimeout(() => {
         t.style.opacity = '0';
@@ -2448,18 +2552,17 @@ async function initApp() {
     await loadResponseRates();
     await loadAnalytics();
     
-    // Animate stats
+    // Animate stats (for hero numbers that may come from backend)
     animateStats();
 }
 
-// Simple stats animation (for static numbers)
+// Simple stats animation (for hero numbers that are already set)
 function animateStats() {
-    // These are just for demo - real stats come from backend
     const targets = [
-        { id: 's1', to: 12847, fmt: v => v.toLocaleString() },
-        { id: 's2', to: 3241, fmt: v => v.toLocaleString() },
-        { id: 's3', to: 247, fmt: v => v.toString() },
-        { id: 's4', to: 89, fmt: v => v + 'K' }
+        { id: 's1', to: parseInt(document.getElementById('s1').innerText) || 12847, fmt: v => v.toLocaleString() },
+        { id: 's2', to: parseInt(document.getElementById('s2').innerText) || 3241, fmt: v => v.toLocaleString() },
+        { id: 's3', to: parseInt(document.getElementById('s3').innerText) || 247, fmt: v => v.toString() },
+        { id: 's4', to: parseInt(document.getElementById('s4').innerText) || 89, fmt: v => v + 'K' }
     ];
     
     targets.forEach(({ id, to, fmt }) => {
