@@ -1912,15 +1912,82 @@ const RESP_RATES = [
   { dept:'Water Dept.', pct:22, color:'var(--coral)' },
 ];
 
+let authToken = localStorage.getItem('authToken') || null;
+
+async function apiCall(endpoint, options = {}) {
+    const url = endpoint;
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            ...options.headers
+        },
+        ...options
+    };
+    if (authToken) {
+        config.headers['Authorization'] = `Bearer ${authToken}`;
+    }
+    const response = await fetch(url, config);
+    if (!response.ok) {
+        let errorMsg = `HTTP ${response.status}: ${response.statusText}`;
+        try {
+            const errData = await response.json();
+            if (errData.error) errorMsg = errData.error;
+        } catch {}
+        throw new Error(errorMsg);
+    }
+    return await response.json();
+}
+
 // ─── INIT ───
-window.addEventListener('DOMContentLoaded', () => {
-  renderFeed();
-  renderLeaderboard();
-  renderTrending();
-  renderResponseBars();
-  renderAnalytics();
-  animateStats();
-});
+async function initApp() {
+    if (authToken) {
+        try {
+            const user = await apiCall('/auth/me');
+            loginAs(user);
+        } catch (error) {
+            localStorage.removeItem('authToken');
+            authToken = null;
+        }
+    }
+    await loadComplaints();
+    await loadLeaderboard();
+    await loadAnalytics();
+    renderTrending();
+    renderResponseBars();
+    animateStats();
+}
+
+window.addEventListener('DOMContentLoaded', initApp);
+
+async function loadComplaints() {
+  try {
+    const data = await apiCall('/complaints');
+    DATA = data; // assuming array
+    renderFeed();
+  } catch (error) {
+    console.error('Failed to load complaints:', error);
+    renderFeed(); // fallback to mock
+  }
+}
+
+async function loadLeaderboard() {
+  try {
+    const data = await apiCall('/analytics/leaderboard');
+    LEADERBOARD = data;
+    renderLeaderboard();
+  } catch (error) {
+    console.error('Failed to load leaderboard:', error);
+  }
+}
+
+async function loadAnalytics() {
+  try {
+    const data = await apiCall('/analytics/stats');
+    // update analytics
+  } catch (error) {
+    console.error('Failed to load analytics:', error);
+  }
+}
 
 // ─── PAGE ───
 function showPage(p) {
@@ -2175,20 +2242,42 @@ function switchAuth(tab) {
 
 function doLogin() {
   const email = document.getElementById('lEmail').value;
-  if (!email) { showToast('Please enter your email','error'); return; }
-  loginAs({ name:'Dev Parmar', init:'DP', email, city:'Anand, Gujarat' });
-  closeModal('loginModal');
-  showToast('Welcome back, Dev! 👋','success');
+  const password = document.getElementById('lPass').value;
+  if (!email || !password) { showToast('Please enter email and password','error'); return; }
+  apiCall('/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password })
+  }).then(data => {
+    authToken = data.token;
+    localStorage.setItem('authToken', authToken);
+    loginAs(data.user);
+    closeModal('loginModal');
+    showToast('Welcome back!','success');
+  }).catch(error => {
+    showToast('Login failed','error');
+  });
 }
 
 function doRegister() {
-  const f = document.getElementById('rFirst').value;
-  const l = document.getElementById('rLast').value;
-  const e = document.getElementById('rEmail').value;
-  if (!f || !e) { showToast('Please fill required fields','error'); return; }
-  loginAs({ name:f+' '+l, init:(f[0]+(l[0]||'')).toUpperCase(), email:e, city:(document.getElementById('rCity').value||'India') });
-  closeModal('loginModal');
-  showToast(`Account created! Welcome, ${f} 🎉`,'success');
+  const first_name = document.getElementById('rFirst').value;
+  const last_name = document.getElementById('rLast').value;
+  const email = document.getElementById('rEmail').value;
+  const password = document.getElementById('rPass').value;
+  const city = document.getElementById('rCity').value;
+  const state = document.getElementById('rState').value;
+  if (!first_name || !last_name || !email || !password || !city || !state) { showToast('Please fill all fields','error'); return; }
+  apiCall('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify({ first_name, last_name, email, password, city, state })
+  }).then(data => {
+    authToken = data.token;
+    localStorage.setItem('authToken', authToken);
+    loginAs(data.user);
+    closeModal('loginModal');
+    showToast('Account created successfully!','success');
+  }).catch(error => {
+    showToast('Registration failed','error');
+  });
 }
 
 function doOAuth(p) {
@@ -2201,8 +2290,19 @@ function loginAs(u) {
   currentUser = u;
   document.getElementById('authBtns').style.display = 'none';
   document.getElementById('userBtns').style.display = 'flex';
-  document.getElementById('navAvatar').textContent = u.init;
-  document.getElementById('navAvatar').insertAdjacentHTML('beforeend','<div class="notif-pip"></div>');
+  document.getElementById('navAvatar').textContent = u.initials;
+  if (u.verified) {
+    document.getElementById('navAvatar').insertAdjacentHTML('beforeend','<div class="notif-pip"></div>');
+  }
+}
+
+function logout() {
+  currentUser = null;
+  authToken = null;
+  localStorage.removeItem('authToken');
+  document.getElementById('authBtns').style.display = 'flex';
+  document.getElementById('userBtns').style.display = 'none';
+  showPage('home');
 }
 
 // ─── COMPLAINT ───
@@ -2226,27 +2326,26 @@ function handleFiles(inp) {
 
 function submitComplaint() {
   const title = document.getElementById('cTitle').value.trim();
-  const cat   = document.getElementById('cCat').value;
-  const desc  = document.getElementById('cDesc').value.trim();
-  if (!title || !cat || !desc) { showToast('Please fill all required fields','error'); return; }
+  const category = document.getElementById('cCat').value;
+  const description = document.getElementById('cDesc').value.trim();
   const city = document.getElementById('cCity').value.trim();
   const state = document.getElementById('cState').value;
   const tags = document.getElementById('cTags').value.split(',').map(t=>t.trim()).filter(Boolean);
   const urgency = document.getElementById('cUrgency').value;
+  if (!title || !category || !description || !city || !state) { showToast('Please fill all required fields','error'); return; }
 
-  DATA.unshift({
-    id: Date.now(), user: currentUser.name, init: currentUser.init,
-    verified: false, time: 'Just now', cat, title, body: desc,
-    location: (city||'Unknown')+', '+state, tags, urgency,
-    up:1, dn:0, comments:0, status:'open',
-    proofs: document.getElementById('fileInput').files.length ? ['📎'] : [],
-    viral:false, pinned:false,
+  apiCall('/complaints/', {
+    method: 'POST',
+    body: JSON.stringify({ title, category, description, city, state, tags, urgency })
+  }).then(data => {
+    closeModal('complaintModal');
+    loadComplaints();
+    showToast('Complaint submitted successfully!','success');
+    ['cTitle','cCat','cDesc','cCity','cTags'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+    document.getElementById('fileChips').innerHTML = '';
+  }).catch(error => {
+    showToast('Failed to submit complaint','error');
   });
-  closeModal('complaintModal');
-  renderFeed();
-  showToast('Complaint filed! ID: CMP-' + Math.random().toString(36).slice(2,8).toUpperCase(), 'success');
-  ['cTitle','cCat','cDesc','cCity','cTags'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('fileChips').innerHTML = '';
 }
 
 // ─── SHARE / FOLLOW ───

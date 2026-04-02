@@ -104,8 +104,7 @@ class Complaint:
             # Trending = (upvotes - downvotes) / age in days
             sort_order = [('upvotes', -1), ('downvotes', 1)]
         elif sort_by == 'critical':
-            urgency_order = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
-            sort_order = [('urgency', 1)]
+            sort_order = [('upvotes', -1)]
         
         return list(self.collection.find(query).sort(sort_order).skip(skip).limit(limit))
     
@@ -209,7 +208,9 @@ class Complaint:
             {'$group': {
                 '_id': '$category',
                 'count': {'$sum': 1}
-            }}
+            }},
+            {'$sort': {'count': -1}},
+            {'$limit': 5}
         ])
         
         # Get city distribution

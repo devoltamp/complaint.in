@@ -1,28 +1,25 @@
 from bson import ObjectId
 from datetime import datetime
-import json
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, ObjectId):
-            return str(obj)
-        if isinstance(obj, datetime):
-            return obj.isoformat()
-        return super().default(obj)
 
 def serialize_doc(doc):
-    """Convert MongoDB document to JSON-serializable dict"""
     if doc is None:
         return None
-    doc['_id'] = str(doc['_id'])
-    if 'user_id' in doc and isinstance(doc['user_id'], ObjectId):
+    
+    # Create a copy to avoid modifying the original dict during iteration
+    doc = dict(doc)
+    
+    if '_id' in doc:
+        doc['_id'] = str(doc['_id'])
+    if 'password' in doc:
+        del doc['password'] # Safety: Never send passwords to frontend
+    if 'user_id' in doc:
         doc['user_id'] = str(doc['user_id'])
-    if 'comments' in doc:
-        for comment in doc['comments']:
-            if 'user_id' in comment and isinstance(comment['user_id'], ObjectId):
-                comment['user_id'] = str(comment['user_id'])
-            if 'created_at' in comment:
-                comment['created_at'] = comment['created_at'].isoformat()
+    
+    # Handle dates
+    for key, value in doc.items():
+        if isinstance(value, datetime):
+            doc[key] = value.isoformat()
+            
     return doc
 
 def serialize_list(docs):

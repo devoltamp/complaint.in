@@ -32,13 +32,17 @@ def get_complaints():
     # Add user details to each complaint
     user_model = User(mongo.db)
     for complaint in complaints:
-        user = user_model.find_by_id(complaint['user_id'])
-        if user:
-            complaint['user'] = {
-                'name': f"{user['first_name']} {user['last_name']}",
-                'initials': user['initials'],
-                'verified': user['verified']
-            }
+        try:
+            user = user_model.find_by_id(complaint['user_id'])
+            if user:
+                complaint['user'] = {
+                    'name': f"{user['first_name']} {user['last_name']}",
+                    'initials': user['initials'],
+                    'verified': user['verified']
+                }
+        except Exception as e:
+            print(f"Error finding user for complaint {complaint['_id']}: {e}")
+            pass
     
     return jsonify(serialize_list(complaints))
 

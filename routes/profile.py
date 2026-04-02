@@ -1,11 +1,11 @@
-from flask import Blueprint
+from bson import ObjectId
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models import User, Complaint
 from utils.helpers import serialize_list
+from flask import Blueprint
 
 profile_bp = Blueprint('profile', __name__)
-
 @profile_bp.route('/', methods=['GET'])
 @jwt_required()
 def get_profile():
