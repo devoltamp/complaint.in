@@ -3,6 +3,7 @@
 A full-stack MERN application for citizens to report and track civic issues.
 
 ## Features
+- Unlimited complains about anything 
 - User authentication (JWT)
 - Create, view, and vote on complaints
 - Real-time analytics dashboard
@@ -19,5 +20,5 @@ A full-stack MERN application for citizens to report and track civic issues.
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/devoltamp/complaint.in
 cd complaints-platform
