@@ -2,6 +2,8 @@
 
 A full-stack MERN application for citizens to report and track civic issues.
 
+![website image](image.png)
+
 ## Features
 - Unlimited complains about anything 
 - User authentication (JWT)
